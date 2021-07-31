@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
-const { getBacon } = require("./handlers");
+const { dbFunction } = require("./handlers");
 
 const PORT = 4000;
 
@@ -27,6 +27,6 @@ express()
   .use("/", express.static(__dirname + "/"))
 
   // REST endpoints?
-  .get("/bacon", getBacon)
+  .post("/addUser", dbFunction)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
