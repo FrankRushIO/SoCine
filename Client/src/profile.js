@@ -11,7 +11,7 @@ const Profile = () => {
       <div>
         <div>{user.email}</div>
         <div>{user.given_name}</div>
-        <div>{user.name}</div>
+        <img src={user.picture} alt="Avatar" />
       </div>
     );
   }
