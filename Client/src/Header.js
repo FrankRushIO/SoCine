@@ -5,20 +5,23 @@ import AuthenticationButton from "./Authentification/authentification-button";
 import SignupButton from "./Authentification/singin-button";
 import Logo from "./SoCine.png";
 import AuthNav from "./Authentification/auth-nav";
+const { REACT_APP_TMDB_KEY } = process.env;
 
 const Header = () => {
   return (
     <Container>
       <StyledLogo src={Logo} alt="logo" />
-      {/* <SearchBar /> */}
+      <SearchBar />
       <AuthNav />
     </Container>
   );
 };
 
 export const SearchBar = () => {
+  const apiKey = REACT_APP_TMDB_KEY;
   const [searchInput, setSearchInput] = useState("");
   const history = useHistory();
+  const request = require("request-promise");
 
   const handleSearchInput = (ev) => {
     console.log(searchInput);
@@ -30,8 +33,21 @@ export const SearchBar = () => {
       ev.preventDefault();
       alert("Your search term has to be at least 3 characters long");
     } else {
-      history.push(`/search?name=${searchInput}`);
-      history.go(0);
+      return request(
+        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchInput}&page=1&include_adult=false`
+      )
+        .then((response) => JSON.parse(response))
+        .then((parsedResponse) => {
+          console.log(parsedResponse);
+
+          const issPosition = {
+            message: parsedResponse,
+          };
+          return issPosition;
+        })
+        .catch((err) => {
+          return console.log("error");
+        });
     }
   };
 
@@ -84,17 +100,17 @@ const SearchButton = styled.button`
   border: 0.1px solid black;
   /* border-radius: 1px; */
   background-color: var(--steel-blue);
-  color: white;
+  color: black;
 
   transition: all 200ms;
 
   &.working {
     cursor: pointer;
-    color: white;
+    color: black;
     background-color: var(--royal-blue);
     &:hover {
       background-color: var(--steel-blue);
-      color: white;
+      color: black;
       border: 0.1px solid black;
     }
   }
