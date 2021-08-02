@@ -9,7 +9,7 @@ export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [status, setStatus] = useState("loading");
   const [auth0Email, setAuth0Email] = useState(null);
-  let history = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     if (auth0Email) {
@@ -19,7 +19,6 @@ export const CurrentUserProvider = ({ children }) => {
         .then((data) => {
           console.log(data.data);
           if (data.data === "Not Found") {
-            console.log("data not found mongodb");
             history.push(`/register`);
           } else {
             console.log(data);
