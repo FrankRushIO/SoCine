@@ -41,6 +41,7 @@ const getUserByEmail = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
 
   const email = req.params.email;
+  console.log(email);
   try {
     await client.connect();
     const db = client.db(dbName);
@@ -90,16 +91,11 @@ const getUsers = async (req, res) => {
   try {
     await client.connect();
     const db = client.db(dbName);
-
     console.log("connected");
-
     const result = await db.collection("Users").find({}).toArray();
-
     client.close();
     console.log(`disconnected from ${dbName}`);
-
     assert.equal(true, result.length !== 0);
-
     res.status(200).json({
       status: 200,
       data: result,

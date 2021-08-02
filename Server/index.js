@@ -11,8 +11,6 @@ const {
   getUsers,
 } = require("./handlers/mongoHandlers");
 
-const { getMovieByName } = require("./handlers/movieHandlers");
-
 const PORT = 4000;
 
 express()

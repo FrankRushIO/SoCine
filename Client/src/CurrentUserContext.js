@@ -1,5 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { createContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import Loading from "./Loading";
 
 export const CurrentUserContext = createContext(null);
@@ -7,50 +8,43 @@ export const CurrentUserContext = createContext(null);
 export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [status, setStatus] = useState("loading");
-  const { user } = useAuth0();
+  const [auth0Email, setAuth0Email] = useState(null);
+  let history = useHistory();
 
   useEffect(() => {
-    fetch("http://localhost:4000/profile/users/franciscool@mail.com")
-      // When the data is received, update currentUser.
-      // Also, set `status` to `idle`
-      .then((res) => res.json())
-      .then((data) => {
-        setCurrentUser(data);
-        setStatus("idle");
-      })
-      .catch((err) => {
-        setStatus("error");
-      });
-  }, []);
+    if (auth0Email) {
+      fetch(`/profile/users/${auth0Email.email}`)
+        // When the data is received, update currentUser
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data.data);
+          if (data.data === "Not Found") {
+            console.log("data not found mongodb");
+            history.push(`/register`);
+          } else {
+            console.log(data);
+            setCurrentUser(data.data);
+            setStatus("idle");
+          }
+        })
+        .catch((err) => {
+          setStatus("error");
+        });
+    }
+  }, [auth0Email]);
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, status }}>
+    <CurrentUserContext.Provider
+      value={{
+        currentUser,
+        status,
+        setCurrentUser,
+        setStatus,
+        auth0Email,
+        setAuth0Email,
+      }}
+    >
       {children}
     </CurrentUserContext.Provider>
   );
 };
-
-// useEffect(() => {
-// if (user === undefined) {
-//   setCurrentUser("no users");
-//   console.log("User not connected");
-// } else {
-//   const email = user.email;
-
-//   fetch(`localhost:4000/profile/users/${email}`)
-//     fetch(`localhost:4000/profile/users/frankog@hotmail.fr`)
-//       .then((res) => res.json())
-//       .then((data) => {
-//         if (data.status === 404) {
-//           console.log("404");
-//         } else {
-//           console.log(data);
-//           setCurrentUser("Francis");
-//           setStatus("idle");
-//         }
-//       })
-//       .catch((err) => {
-//         setStatus("error");
-//       });
-//     // }
-//   }, []);
