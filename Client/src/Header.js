@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import AuthenticationButton from "./authentification-button";
+import AuthenticationButton from "./Authentification/authentification-button";
+import SignupButton from "./Authentification/singin-button";
 import Logo from "./SoCine.png";
+import AuthNav from "./Authentification/auth-nav";
 
 const Header = () => {
   return (
     <Container>
       <StyledLogo src={Logo} alt="logo" />
-      <SearchBar />
-      <AuthenticationButton />
+      {/* <SearchBar /> */}
+      <AuthNav />
     </Container>
   );
 };

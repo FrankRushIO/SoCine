@@ -6,9 +6,7 @@ const { REACT_APP_AUTH0_CLIENT_ID } = process.env;
 
 const Auth0ProviderWithHistory = ({ children }) => {
   const domain = REACT_APP_AUTH0_DOMAIN;
-  console.log(domain);
   const clientId = REACT_APP_AUTH0_CLIENT_ID;
-  console.log(clientId);
   const history = useHistory();
 
   const onRedirectCallback = (appState) => {
