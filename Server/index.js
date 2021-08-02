@@ -4,7 +4,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
-const { dbFunction } = require("./handlers");
+const {
+  createUser,
+  getUserByEmail,
+  getUserById,
+  getUsers,
+} = require("./handlers/mongoHandlers");
+
+const { getMovieByName } = require("./handlers/movieHandlers");
 
 const PORT = 4000;
 
@@ -27,6 +34,9 @@ express()
   .use("/", express.static(__dirname + "/"))
 
   // REST endpoints?
-  .post("/addUser", dbFunction)
-
+  .post("/createUser", createUser)
+  .get("/profile/users/:email", getUserByEmail)
+  .get("users/:id", getUserById)
+  .get("/users", getUsers)
+  // .get("/search/movie", getMovieByName)
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
