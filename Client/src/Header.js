@@ -1,3 +1,4 @@
+import { useParams } from "react-router";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -33,22 +34,25 @@ export const SearchBar = () => {
       ev.preventDefault();
       alert("Your search term has to be at least 3 characters long");
     } else {
-      return request(
-        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchInput}&page=1&include_adult=false`
-      )
-        .then((response) => JSON.parse(response))
-        .then((parsedResponse) => {
-          console.log(parsedResponse);
-
-          const issPosition = {
-            message: parsedResponse,
-          };
-          return issPosition;
-        })
-        .catch((err) => {
-          return console.log("error");
-        });
+      history.push(`/results/${searchInput}`);
     }
+
+    //   return request(
+    //     `https://api.themoviedb.org/3/search/movie?api_key=a56759345cdd5a5d3830b778270ea182&language=en-US&query=${searchInput}&page=1&include_adult=false`
+    //   )
+    //     .then((response) => JSON.parse(response))
+    //     .then((parsedResponse) => {
+    //       console.log(parsedResponse);
+    //       // console.log(REACT_APP_TMDB_KEY);
+    //       const searchResults = {
+    //         message: parsedResponse,
+    //       };
+    //       return searchResults;
+    //     })
+    //     .catch((err) => {
+    //       return console.log("error");
+    //     });
+    // }
   };
 
   return (

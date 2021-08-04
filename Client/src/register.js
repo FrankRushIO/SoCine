@@ -55,15 +55,26 @@ const Register = () => {
             type="text"
             value={givenName}
             onChange={handleChangeGivenName}
+            required
           />
         </label>
         <label>
           Surname :
-          <input type="text" value={surname} onChange={handleChangeSurName} />
+          <input
+            type="text"
+            value={surname}
+            onChange={handleChangeSurName}
+            required
+          />
         </label>
         <label>
           Pseudo :
-          <input type="text" value={pseudo} onChange={handleChangePseudo} />
+          <input
+            type="text"
+            value={pseudo}
+            onChange={handleChangePseudo}
+            required
+          />
         </label>
         <input type="submit" value="Envoyer" />
       </form>

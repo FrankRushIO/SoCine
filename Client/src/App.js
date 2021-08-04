@@ -8,7 +8,8 @@ import ProtectedRoute from "./Authentification/protected-route";
 import { CurrentUserContext } from "./CurrentUserContext";
 import React, { useContext, useEffect } from "react";
 import Register from "./register";
-
+import Results from "./results";
+import Movie from "./movie";
 function App() {
   const { setAuth0Email } = useContext(CurrentUserContext);
   const { isLoading, user } = useAuth0();
@@ -33,6 +34,12 @@ function App() {
         <ProtectedRoute exact path="/profile" component={Profile} />
         <Route exact path="/register">
           <Register />
+        </Route>
+        <Route path="/results/:search">
+          <Results />
+        </Route>
+        <Route path="/movie/:title">
+          <Movie />
         </Route>
       </Switch>
       {/* </Main> */}
