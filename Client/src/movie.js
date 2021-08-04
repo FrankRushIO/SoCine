@@ -8,11 +8,11 @@ const Movie = () => {
   const imported = useParams();
   const searchInput = Object.values(imported)[0];
   const request = require("request-promise");
-  const [movie, setResults] = useState([]);
-
+  const [movie, setMovie] = useState([]);
+  console.log(searchInput);
   const handleSearch = () => {
     return request(
-      `https://api.themoviedb.org/3/movie/${searchInput}?api_key=a56759345cdd5a5d3830b778270ea182`
+      `https://api.themoviedb.org/3/movie/808?api_key=a56759345cdd5a5d3830b778270ea182`
     )
       .then((response) => JSON.parse(response))
       .then((parsedResponse) => {
@@ -20,44 +20,38 @@ const Movie = () => {
         const searchResults = {
           message: parsedResponse,
         };
+        setMovie(parsedResponse);
         return searchResults;
       })
       .catch((err) => {
         return console.log("error");
       });
   };
-  // useEffect(() => {
-  //   console.log(typeof results);
-  // }, [results]);
 
   handleSearch();
 
-  // useEffect(() => {
-  //   console.log(results);
-  //   console.log(typeof results);
-  // }, [results]);
-
   if (!movie) return <div>Loading</div>;
+  else {
+    return (
+      <div>
+        <MovieContainer>
+          <div>
+            <img
+              src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
+              alt="Movie poster"
+            />
+          </div>
+          <div>
+            <Link to={`/movie/${movie.id}`}>
+              <Title>{movie.title}</Title>
+            </Link>
 
-  return (
-    <div>
-      <MovieContainer>
-        <div>
-          <img
-            src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
-            alt="Movie poster"
-          />
-        </div>
-        <div>
-          <Link to={`/movie/${movie.id}`}>
-            <Title>{movie.title}</Title>
-          </Link>
-
-          <Overview>{movie.overview}</Overview>
-        </div>
-      </MovieContainer>
-    </div>
-  );
+            <Overview>{movie.overview}</Overview>
+          </div>
+        </MovieContainer>
+      </div>
+    );
+  }
 };
 
 const MovieContainer = styled.div`
