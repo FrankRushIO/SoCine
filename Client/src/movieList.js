@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useParams } from "react-router";
 // import { SearchBar } from "./Header";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { CurrentUserContext } from "./CurrentUserContext";
 
-const Results = () => {
+const MovieList = () => {
   const imported = useParams();
   const searchInput = Object.values(imported)[0];
   const request = require("request-promise");
   const [results, setResults] = useState([]);
+  const { currentUser } = useContext(CurrentUserContext);
 
   const handleSearch = () => {
     return request(
@@ -31,6 +33,10 @@ const Results = () => {
   };
 
   handleSearch();
+  if (!currentUser) return <div>Loading</div>;
+  else {
+    console.log(currentUser.likedMovies);
+  }
 
   return (
     <div>
@@ -74,4 +80,4 @@ const Overview = styled.p`
   max-width: 300px;
 `;
 
-export default Results;
+export default MovieList;

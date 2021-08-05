@@ -1,19 +1,15 @@
 import React, { useContext, useEffect } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = () => {
   const { currentUser } = useContext(CurrentUserContext);
   console.log(currentUser);
-  const { user } = useAuth0();
-  console.log(user.email);
-  const { name, picture, email } = user;
 
   useEffect(() => {
     console.log(currentUser);
   }, [currentUser]);
 
-  if (!currentUser.pseudo) return <div>Loading</div>;
+  if (!currentUser?.pseudo) return <div>Loading</div>;
   else {
     return (
       <div>
@@ -22,6 +18,7 @@ const Profile = () => {
         <div>Surname : {currentUser.surname}</div>
         <div>Pseudo: {currentUser.pseudo}</div>
         <div>Email: {currentUser.email}</div>
+        <div>Liked movies : {currentUser.likedMovies}</div>
       </div>
     );
   }

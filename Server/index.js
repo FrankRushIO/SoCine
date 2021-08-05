@@ -9,6 +9,8 @@ const {
   getUserByEmail,
   getUserById,
   getUsers,
+  updateUser,
+  updateLikedMovies,
 } = require("./handlers/mongoHandlers");
 
 const PORT = 4000;
@@ -34,7 +36,7 @@ express()
   // REST endpoints?
   .post("/createUser", createUser)
   .get("/profile/users/:email", getUserByEmail)
-  .get("users/:id", getUserById)
+  .get("/user/:id", getUserById)
   .get("/users", getUsers)
-  // .get("/search/movie", getMovieByName)
+  .patch("/user/:id", updateLikedMovies)
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

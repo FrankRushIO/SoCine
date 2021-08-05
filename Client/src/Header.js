@@ -1,12 +1,9 @@
-import { useParams } from "react-router";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import AuthenticationButton from "./Authentification/authentification-button";
-import SignupButton from "./Authentification/singin-button";
 import Logo from "./SoCine.png";
 import AuthNav from "./Authentification/auth-nav";
-const { REACT_APP_TMDB_KEY } = process.env;
+// const { REACT_APP_TMDB_KEY } = process.env;
 
 const Header = () => {
   return (
@@ -19,10 +16,9 @@ const Header = () => {
 };
 
 export const SearchBar = () => {
-  const apiKey = REACT_APP_TMDB_KEY;
   const [searchInput, setSearchInput] = useState("");
   const history = useHistory();
-  const request = require("request-promise");
+  // const request = require("request-promise");
 
   const handleSearchInput = (ev) => {
     console.log(searchInput);
@@ -36,23 +32,6 @@ export const SearchBar = () => {
     } else {
       history.push(`/results/${searchInput}`);
     }
-
-    //   return request(
-    //     `https://api.themoviedb.org/3/search/movie?api_key=a56759345cdd5a5d3830b778270ea182&language=en-US&query=${searchInput}&page=1&include_adult=false`
-    //   )
-    //     .then((response) => JSON.parse(response))
-    //     .then((parsedResponse) => {
-    //       console.log(parsedResponse);
-    //       // console.log(REACT_APP_TMDB_KEY);
-    //       const searchResults = {
-    //         message: parsedResponse,
-    //       };
-    //       return searchResults;
-    //     })
-    //     .catch((err) => {
-    //       return console.log("error");
-    //     });
-    // }
   };
 
   return (

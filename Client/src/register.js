@@ -1,16 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
 import { useHistory } from "react-router";
-import { useAuth0 } from "@auth0/auth0-react";
+import { v4 as uuidv4 } from "uuid";
 
 const Register = () => {
-  const { setCurrentUser, currentUser } = useContext(CurrentUserContext);
+  const { setCurrentUser } = useContext(CurrentUserContext);
   const { auth0Email } = useContext(CurrentUserContext);
   const [givenName, setGivenName] = useState("");
   const [surname, setSurname] = useState("");
   const [pseudo, setPseudo] = useState("");
   const email = auth0Email.email;
   const history = useHistory();
+  const likedMovies = [];
+  const _id = uuidv4();
 
   const handleChangeGivenName = (ev) => {
     setGivenName(ev.target.value);
@@ -25,7 +27,7 @@ const Register = () => {
   };
 
   const handleSubmit = (ev) => {
-    const newUser = { givenName, surname, pseudo, email };
+    const newUser = { givenName, surname, pseudo, email, likedMovies, _id };
     console.log(newUser);
     const requestOptions = {
       method: "POST",
