@@ -15,11 +15,6 @@ const createUser = async (req, res) => {
   const dbName = "SoCine";
   console.log(MONGO_URI);
   const client = new MongoClient(MONGO_URI, options);
-  // const givenName = req.body.givenName;
-  // const surname = req.body.surname;
-  // const pseudo = req.body.pseudo;
-  // const email = req.body.email;
-  // const avatar = req.body.avatarSrc;
 
   try {
     await client.connect();
@@ -61,10 +56,11 @@ const getUserByEmail = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
+  const dbName = "SoCine";
   // creates a new client
   const client = new MongoClient(MONGO_URI, options);
+  const id = req.params.id;
 
-  const _id = req.params._id;
   try {
     await client.connect();
 
@@ -72,14 +68,14 @@ const getUserById = async (req, res) => {
     const db = client.db(dbName);
     console.log("connected!");
 
-    const result = await db.collection("Users").findOne({ _id });
-    console.log(result);
+    const result = await db.collection("Users").updateOne({ id });
+    console.log("result", result);
     result
-      ? res.status(200).json({ status: 200, _id, data: result })
-      : res.status(404).json({ status: 404, _id, data: "Not Found" });
+      ? res.status(200).json({ status: 200, id, data: result })
+      : res.status(404).json({ status: 404, id, data: "Not Found" });
   } catch (err) {
     console.log(err.stack);
-    res.status(500).json({ status: 400, message: "nope" });
+    res.status(500).json({ status: 500, message: "Error" });
   }
   client.close();
   console.log("disconnected!");
@@ -106,4 +102,50 @@ const getUsers = async (req, res) => {
   }
 };
 
-module.exports = { createUser, getUserByEmail, getUserById, getUsers };
+const updateLikedMovies = async (req, res) => {
+  const dbName = "SoCine";
+  // creates a new client
+  const client = new MongoClient(MONGO_URI, options);
+  const id = req.params.id;
+  console.log("id:", id);
+  console.log(req.body);
+
+  try {
+    await client.connect();
+    const db = client.db(dbName);
+    console.log("connected");
+    if (req.body.type === "like") {
+      await db
+        .collection("Users")
+        .updateOne(
+          { _id: id },
+          { $addToSet: { likedMovies: req.body.searchInput } }
+        );
+    } else {
+      await db
+        .collection("Users")
+        .updateOne(
+          { _id: id },
+          { $pull: { likedMovies: req.body.searchInput } }
+        );
+    }
+
+    client.close();
+    console.log(`disconnected from ${dbName}`);
+    res.status(200).json({
+      status: 200,
+      message: "change made",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: 500, message: err.message });
+  }
+};
+
+module.exports = {
+  createUser,
+  getUserByEmail,
+  getUserById,
+  getUsers,
+  updateLikedMovies,
+};

@@ -1,5 +1,5 @@
 import Auth0ProviderWithHistory from "./auth0Provider";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Header from "./Header";
 import HomePage from "./HomePage";
 import Profile from "./profile";
@@ -10,15 +10,17 @@ import React, { useContext, useEffect } from "react";
 import Register from "./register";
 import Results from "./results";
 import Movie from "./movie";
+import MovieList from "./movieList";
 function App() {
   const { setAuth0Email } = useContext(CurrentUserContext);
   const { isLoading, user } = useAuth0();
-  console.log(user);
+
   useEffect(() => {
     if (user) {
       setAuth0Email(user);
     }
   }, [user]);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -40,6 +42,9 @@ function App() {
         </Route>
         <Route path="/movie/:title">
           <Movie />
+        </Route>
+        <Route path="/movielist">
+          <MovieList />
         </Route>
       </Switch>
       {/* </Main> */}

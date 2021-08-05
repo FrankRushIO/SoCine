@@ -1,7 +1,5 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import React, { createContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Loading from "./Loading";
 
 export const CurrentUserContext = createContext(null);
 
@@ -21,7 +19,6 @@ export const CurrentUserProvider = ({ children }) => {
           if (data.data === "Not Found") {
             history.push(`/register`);
           } else {
-            console.log(data);
             setCurrentUser(data.data);
             setStatus("idle");
           }
