@@ -1,16 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { generatePath } from "react-router-dom";
 import { CurrentUserContext } from "./CurrentUserContext";
 
 const Profile = () => {
-  const { currentUser } = useContext(CurrentUserContext);
-  console.log(currentUser);
+  const { currentUser, likedMovies } = useContext(CurrentUserContext);
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
-
-  if (!currentUser?.pseudo) return <div>Loading</div>;
-  else {
+  if (currentUser?.pseudo) {
     return (
       <div>
         <h1>{currentUser.pseudo}'s profile</h1>
@@ -19,8 +14,23 @@ const Profile = () => {
         <div>Pseudo: {currentUser.pseudo}</div>
         <div>Email: {currentUser.email}</div>
         <div>Liked movies : {currentUser.likedMovies}</div>
+        <div>
+          {likedMovies.map((movie) => {
+            return (
+              <div>
+                <div>{movie.title}</div>
+                <img src={movie.posterPath} alt="Movie Poster" />
+                <p>
+                  {movie.genre.map((genre) => {
+                    return <p>{genre.name} </p>;
+                  })}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
-  }
+  } else return <div>Loading</div>;
 };
 export default Profile;
