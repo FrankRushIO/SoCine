@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Recommendations from "./recommendation";
 
 const Movie = () => {
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser, setLikeAction } = useContext(CurrentUserContext);
   const imported = useParams();
   console.log(imported);
   const searchInput = Object.values(imported)[0];
@@ -37,14 +37,16 @@ const Movie = () => {
     let type = "";
     console.log(currentUser._id);
     if (isLiked) {
-      const index = currentUser.likedMovies.indexOf(searchInput);
+      // const index = currentUser.likedMovies.indexOf(searchInput);
       console.log(index);
-      currentUser.likedMovies.splice(index, 1);
+      // currentUser.likedMovies.splice(index, 1);
       console.log(currentUser.likedMovies);
       type = "unlike";
+      setLikeAction({ isLiked: "unlike", movieId: searchInput });
     } else {
-      currentUser.likedMovies.push(searchInput);
+      // currentUser.likedMovies.push(searchInput);
       type = "like";
+      setLikeAction({ isLiked: "like", movieId: searchInput });
     }
     const requestOptions = {
       method: "PATCH",
@@ -67,7 +69,6 @@ const Movie = () => {
     handleSearch();
     console.log(currentUser);
     if (currentUser) {
-      console.log("hey");
       verifyLike();
     }
   }, [currentUser, imported]);
