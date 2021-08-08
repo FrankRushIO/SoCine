@@ -56,13 +56,14 @@ export const CurrentUserProvider = ({ children }) => {
         `https://api.themoviedb.org/3/movie/${id}?api_key=a56759345cdd5a5d3830b778270ea182`
       );
       const parsedResponse = await response.json();
-      console.log(parsedResponse);
+      // console.log(parsedResponse);
       const movie = {
         title: parsedResponse.title,
         posterPath: `https://image.tmdb.org/t/p/w185/${parsedResponse.poster_path}`,
         genre: parsedResponse.genres,
+        id: parsedResponse.id,
       };
-      console.log(movie);
+      // console.log(movie);
       return movie;
     } catch (err) {
       console.log("error", err);

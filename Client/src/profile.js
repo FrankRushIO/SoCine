@@ -20,11 +20,11 @@ const Profile = () => {
               <div>
                 <div>{movie.title}</div>
                 <img src={movie.posterPath} alt="Movie Poster" />
-                <p>
-                  {movie.genre.map((genre) => {
-                    return <p>{genre.name} </p>;
+                <div>
+                  {movie.genre.map((genre, index) => {
+                    return <div key={index}>{genre.name} </div>;
                   })}
-                </p>
+                </div>
               </div>
             );
           })}

@@ -25,6 +25,7 @@ const Movie = () => {
         const searchResults = {
           message: parsedResponse,
         };
+        console.log(parsedResponse);
         setMovie(parsedResponse);
         return searchResults;
       })
@@ -38,7 +39,7 @@ const Movie = () => {
     console.log(currentUser._id);
     if (isLiked) {
       // const index = currentUser.likedMovies.indexOf(searchInput);
-      console.log(index);
+      // console.log(index);
       // currentUser.likedMovies.splice(index, 1);
       console.log(currentUser.likedMovies);
       type = "unlike";
