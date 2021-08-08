@@ -12,6 +12,7 @@ import Results from "./results";
 import Movie from "./movie";
 import MovieList from "./movieList";
 import Prediction from "./prediction";
+import GlobalStyles from "./GlobalStyles";
 
 function App() {
   const { setAuth0Email } = useContext(CurrentUserContext);
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <Auth0ProviderWithHistory>
+      <GlobalStyles />
       <Header />
       {/* <Main> */}
       <Switch>
