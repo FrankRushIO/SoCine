@@ -11,7 +11,7 @@ import Register from "./register";
 import Results from "./results";
 import Movie from "./movie";
 import MovieList from "./movieList";
-import Prediction from "./prediciton";
+import Prediction from "./prediction";
 
 function App() {
   const { setAuth0Email } = useContext(CurrentUserContext);
@@ -48,7 +48,7 @@ function App() {
         <Route path="/movielist">
           <MovieList />
         </Route>
-        <Route path="/prediciton">
+        <Route path="/prediction">
           <Prediction />
         </Route>
       </Switch>
