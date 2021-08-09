@@ -1,5 +1,6 @@
 import react, { useState, useContext, useEffect } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
+import styled from "styled-components";
 
 const Prediction = () => {
   const { currentUser, likedMovies, mostPopularGenreId } =
@@ -60,41 +61,42 @@ const Prediction = () => {
     }
     return result;
   }
+  // useEffect(() => {
+  //   const movieIds = likedMovies.map((movie) => {
+  //     return movie.id;
+  //   });
+  //   setMovieId(movieIds);
+  // }, []);
 
-  useEffect(() => {
-    const movieIds = likedMovies.map((movie) => {
-      return movie.id;
-    });
-    setMovieId(movieIds);
-  }, [likedMovies]);
+  // console.log(movieIds);
 
-  useEffect(() => {
-    if (movieId.length <= 3) {
-      console.log("hey", movieId);
-      return <div>Loading</div>;
-    } else {
-      console.log(movieId);
-      const randomMovieIds = getRandom(movieId, 4);
-      console.log(randomMovieIds);
-      randomMovieIds.forEach((id) => {
-        console.log(id);
-        fetch(
-          `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=a56759345cdd5a5d3830b778270ea182&language=en-US&page=1`
-        )
-          // When the data is received, update currentUser
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            const result = data.results[0].title;
-            console.log(result);
-            setRecommendations([...recommendations, result]);
-          })
-          .catch((err) => {
-            console.log("error");
-          });
-      });
-    }
-  }, [movieId]);
+  // useEffect(() => {
+  //   if (movieId.length <= 3) {
+  //     console.log("hey", movieId);
+  //     return <div>Loading</div>;
+  //   } else {
+  //     console.log(movieId);
+  //     const randomMovieIds = getRandom(movieId, 4);
+  //     console.log(randomMovieIds);
+  //     randomMovieIds.forEach((id) => {
+  //       console.log(id);
+  //       fetch(
+  //         `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=a56759345cdd5a5d3830b778270ea182&language=en-US&page=1`
+  //       )
+  //         // When the data is received, update currentUser
+  //         .then((res) => res.json())
+  //         .then((data) => {
+  //           console.log(data);
+  //           const result = data.results[0].title;
+  //           console.log(result);
+  //           setRecommendations([...recommendations, result]);
+  //         })
+  //         .catch((err) => {
+  //           console.log("error");
+  //         });
+  //     });
+  //   }
+  // }, [movieId]);
 
   useEffect(() => {
     likedMovies.map((movie) => {
@@ -139,29 +141,103 @@ const Prediction = () => {
       });
   }, [genreId]);
 
-  if (recommendations === []) return <di>Loading...</di>;
-  else {
-    console.log(recommendations);
+  if (likedMovies.length === 0) {
+    return <div>Loading</div>;
+  } else {
+    const randomMovies = getRandom(likedMovies, 3);
+    console.log(randomMovies);
+    console.log(randomMovies[0].recommendation);
+    console.log(popularMovies);
     return (
-      <div>
-        <div>
-          {popularMovies.map((movie, index) => {
-            return <div key={index}> popular {movie.title}</div>;
+      <Container>
+        <TagLine>Movies recommended from movies you've seen</TagLine>
+        <RecomendationContainer>
+          {randomMovies.map((movie, index) => {
+            return (
+              <div key={index}>
+                {" "}
+                <Title>{movie.title}</Title>
+                <img
+                  src={`https://image.tmdb.org/t/p/w185/${movie.posterPath}`}
+                />
+              </div>
+            );
           })}
-        </div>
-        <div>
+        </RecomendationContainer>
+        <TagLine>Movies recommended from your favorite genre</TagLine>
+        <GenreContainer>
           {genreMovies.map((movie, index) => {
-            return <div key={index}> genre {movie.title}</div>;
+            return (
+              <div key={index}>
+                {" "}
+                <Title>{movie.title}</Title>
+                <img
+                  src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
+                />
+              </div>
+            );
           })}
-        </div>
-        <div>
-          {recommendations.map((movie, index) => {
-            return <div key={index}>Recommendations {movie}</div>;
+        </GenreContainer>
+        <TagLine>Movies recommended from popular movies right now</TagLine>
+        <PopularContainer>
+          {popularMovies.map((movie, index) => {
+            return (
+              <div key={index}>
+                {" "}
+                <Title>{movie.title}</Title>
+                <img
+                  src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
+                />
+              </div>
+            );
           })}
-        </div>
-      </div>
+        </PopularContainer>
+      </Container>
     );
   }
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 1200px;
+  /* background-color: red; */
+`;
+const PopularContainer = styled.div`
+  display: flex;
+  /* margin-top: 10px; */
+  justify-content: space-around;
+  width: 1000px;
+  border: solid 2px black;
+`;
+const GenreContainer = styled.div`
+  display: flex;
+  /* margin-top: 10px; */
+  justify-content: space-around;
+  width: 1000px;
+  border: solid 2px black;
+`;
+const RecomendationContainer = styled.div`
+  display: flex;
+  /* margin-top: 10px; */
+  justify-content: space-around;
+  width: 1000px;
+  border: solid 2px black;
+`;
+
+const Title = styled.div`
+  max-width: 180px;
+  min-height: 30px;
+  margin-top: 10px;
+`;
+
+const TagLine = styled.span`
+  font-size: 25px;
+  justify-content: base;
+  width: 900px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+`;
 
 export default Prediction;

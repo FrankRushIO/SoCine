@@ -1,18 +1,39 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "./SoCine.png";
 import AuthNav from "./Authentification/auth-nav";
+
 // const { REACT_APP_TMDB_KEY } = process.env;
 
 const Header = () => {
   return (
     <Container>
       <StyledLogo src={Logo} alt="logo" />
-      <SearchBar />
-      <Auth0div>
-        <AuthNav />
-      </Auth0div>
+
+      <Center>
+        <NavItem>
+          <StyledNavLink className="navitem" to="/">
+            HomePage
+          </StyledNavLink>
+        </NavItem>
+        <NavItem>
+          <StyledNavLink className="navitem" to="/profile">
+            Profile
+          </StyledNavLink>
+        </NavItem>
+        <NavItem>
+          <StyledNavLink className="navitem" exact to="/prediction">
+            Recommendations
+          </StyledNavLink>
+        </NavItem>
+      </Center>
+      <Right>
+        <SearchBar />
+        <Auth0div>
+          <AuthNav />
+        </Auth0div>
+      </Right>
     </Container>
   );
 };
@@ -21,6 +42,14 @@ const Auth0div = styled.div`
   padding-left: 125px;
 `;
 
+const Right = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: baseline;
+  align-content: stretch;
+`;
 export const SearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
   const history = useHistory();
@@ -51,7 +80,7 @@ export const SearchBar = () => {
             handleSearch(ev);
           }
         }}
-        placeholder="Search for any items"
+        placeholder="Search for any movie"
       ></SearchInput>
       <SearchButton
         className={searchInput.length < 3 ? "" : "working"}
@@ -81,7 +110,6 @@ const StyledLogo = styled.img`
 const SearchInput = styled.input`
   font-size: 14px;
   padding: 2px;
-  margin-right: 10px;
   border-radius: 2px;
 `;
 const SearchButton = styled.button`
@@ -103,6 +131,27 @@ const SearchButton = styled.button`
       color: black;
       border: 0.1px solid black;
     }
+  }
+`;
+
+const Center = styled.div`
+  display: flex;
+  margin: 0 auto;
+`;
+
+const NavItem = styled.div`
+  margin: 0 2rem;
+  padding: 10px;
+  font-size: 20px;
+`;
+
+const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
+  color: black;
+  font-size: larger;
+
+  &.active.navitem {
+    border-bottom: 1px solid black;
   }
 `;
 

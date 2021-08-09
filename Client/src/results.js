@@ -9,9 +9,6 @@ const Results = () => {
   const searchInput = Object.values(imported)[0];
   const request = require("request-promise");
   const [results, setResults] = useState([]);
-  const [green, setGreen] = useState(false);
-  const [yellow, setYellow] = useState(false);
-  const [red, setRed] = useState(false);
 
   const handleSearch = () => {
     return request(

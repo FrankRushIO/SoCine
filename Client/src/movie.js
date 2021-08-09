@@ -6,7 +6,8 @@ import styled from "styled-components";
 import Recommendations from "./recommendation";
 
 const Movie = () => {
-  const { currentUser, setLikeAction } = useContext(CurrentUserContext);
+  const { currentUser, setLikeAction, likedMovies } =
+    useContext(CurrentUserContext);
   const imported = useParams();
   console.log(imported);
   const searchInput = Object.values(imported)[0];
@@ -76,7 +77,8 @@ const Movie = () => {
 
   const verifyLike = () => {
     console.log(currentUser);
-    if (currentUser?.likedMovies === []) {
+    console.log(currentUser.likedMovies);
+    if (!currentUser || currentUser.likedMovies === []) {
       setIsLiked(false);
     } else {
       const likedMovies = currentUser.likedMovies;

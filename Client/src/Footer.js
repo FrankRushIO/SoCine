@@ -57,7 +57,7 @@ const Footer = () => {
 
 const Wrapper = styled.div`
   /* background-image: linear-gradient(white, var(--beau-blue)); */
-  position: fixed;
+  /* position: fixed; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,6 +68,8 @@ const Wrapper = styled.div`
   background-color: pink;
   color: white;
   text-align: center;
+  margin-top: 20px;
+  padding-top: 10px;
 `;
 
 // width: 100vw;

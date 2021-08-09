@@ -7,6 +7,7 @@ const Profile = () => {
   const { currentUser, likedMovies } = useContext(CurrentUserContext);
 
   if (currentUser?.pseudo) {
+    console.log(likedMovies);
     return (
       <Container>
         <Greeting>{currentUser.pseudo}'s profile</Greeting>

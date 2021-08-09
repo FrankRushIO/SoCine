@@ -18,6 +18,8 @@ import Footer from "./Footer";
 import Contact from "./Contact";
 import HelpCenter from "./HelpCenter";
 import CompanyInfo from "./CompanyInfo";
+import Users from "./Users";
+import User from "./User";
 
 function App() {
   const { setAuth0Email } = useContext(CurrentUserContext);
@@ -67,7 +69,14 @@ function App() {
         <Route path="/companyinfo">
           <CompanyInfo />
         </Route>
+        <Route path="/users">
+          <Users />
+        </Route>
+        <Route path="/pseudo">
+          <User />
+        </Route>
       </Switch>
+
       {/* </Main> */}
       <Footer />
     </Auth0ProviderWithHistory>
