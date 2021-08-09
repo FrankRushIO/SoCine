@@ -1,0 +1,23 @@
+[
+    {
+      "question": "What are your shipping rates?",
+      "answer": "We currently offer free shipping for all orders!",
+      "_id": 1111
+    },
+    {
+      "question": "When can I expect my order to be delivered?",
+      "answer": "Shipping times may vary based on your location, all orders should be recieved in 5-6 business days (give or take an eternity).",
+      "_id": 1112
+    },
+    {
+      "question": "Can I track my order?",
+      "answer": "We currently do not provide tracking as shipping times can vary greatly.",
+      "_id": 1113
+    },
+    {
+      "question": "What is your return policy?",
+      "answer": "You have a period of 30 days + eternity for a full refund.",
+      "_id": 1114
+    }
+  ]
+  

@@ -4,6 +4,7 @@ require("dotenv").config({ path: "../.env" });
 const { MONGO_URI } = process.env;
 const assert = require("assert");
 const dbName = "SoCine";
+const faqs = require("../faqs.json");
 
 const options = {
   useNewUrlParser: true,
@@ -166,6 +167,10 @@ const updateLikedMovies = async (req, res) => {
   }
 };
 
+const getAllFaqs = (req, res) => {
+  res.status(200).json({ status: 200, data: faqs });
+};
+
 module.exports = {
   createUser,
   getUserByEmail,
@@ -173,4 +178,5 @@ module.exports = {
   getUsers,
   updateLikedMovies,
   getUserByPseudo,
+  getAllFaqs,
 };
