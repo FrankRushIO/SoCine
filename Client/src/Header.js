@@ -10,10 +10,16 @@ const Header = () => {
     <Container>
       <StyledLogo src={Logo} alt="logo" />
       <SearchBar />
-      <AuthNav />
+      <Auth0div>
+        <AuthNav />
+      </Auth0div>
     </Container>
   );
 };
+
+const Auth0div = styled.div`
+  padding-left: 125px;
+`;
 
 export const SearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -63,6 +69,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   align-content: baseline;
+  margin-bottom: 30px;
 `;
 
 const StyledLogo = styled.img`

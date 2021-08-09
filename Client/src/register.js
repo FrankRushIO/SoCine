@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
 import { useHistory } from "react-router";
 import { v4 as uuidv4 } from "uuid";
+import styled from "styled-components";
 
 const Register = () => {
   const { setCurrentUser } = useContext(CurrentUserContext);
@@ -13,6 +14,7 @@ const Register = () => {
   const history = useHistory();
   const likedMovies = [];
   const _id = uuidv4();
+  const [pseudoAvailable, setPseudoAvailable] = useState(false);
 
   const handleChangeGivenName = (ev) => {
     setGivenName(ev.target.value);
@@ -27,6 +29,34 @@ const Register = () => {
   };
 
   const handleSubmit = (ev) => {
+    // if (pseudo.length <= 3) alert("Pseudo is not long enough");
+    // else {
+    // console.log(pseudo);
+    // if (pseudo.length >= 3) {
+    //   fetch(`/user/pseudo/${pseudo}`)
+    //     // When the data is received, update currentUser
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       console.log(data.data);
+    //       if (data.data === "Not Found") {
+    //         setPseudoAvailable(false);
+    //         alert("Pseudo is already taken");
+    //         history.push("/");
+    //       } else {
+    //         setPseudoAvailable(true);
+    //         console.log("pseudo not taken");
+    //         submit();
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.log("error");
+    //     });
+    // } else {
+    //   alert("The pseudo is not long enough");
+    // }
+
+    // const submit = () => {
+    //   if (pseudoAvailable) {
     const newUser = { givenName, surname, pseudo, email, likedMovies, _id };
     console.log(newUser);
     const requestOptions = {
@@ -45,44 +75,122 @@ const Register = () => {
       });
     alert("Le nom a été soumis : " + givenName + surname + pseudo);
     ev.preventDefault();
+    //   } else {
+    //     console.log("some infos are wrong");
+    //     history.push("/");
+    //   }
+    // };
+    // }
   };
 
-  return (
-    <div>
-      <h2>Please register your account</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Given Name :
-          <input
-            type="text"
-            value={givenName}
-            onChange={handleChangeGivenName}
-            required
-          />
-        </label>
-        <label>
-          Surname :
-          <input
-            type="text"
-            value={surname}
-            onChange={handleChangeSurName}
-            required
-          />
-        </label>
-        <label>
-          Pseudo :
-          <input
-            type="text"
-            value={pseudo}
-            onChange={handleChangePseudo}
-            required
-          />
-        </label>
-        <input type="submit" value="Envoyer" />
-      </form>
-      <p>Email : {email}</p>
-    </div>
-  );
+  if (!auth0Email) return <div>Loading...</div>;
+  else {
+    return (
+      <Container>
+        <RegisterMessage>Please register your account</RegisterMessage>
+        <RegisterContainer>
+          <Form onSubmit={handleSubmit}>
+            <InputLabel>
+              Given Name :
+              <InputField
+                type="text"
+                value={givenName}
+                onChange={handleChangeGivenName}
+                required
+              />
+            </InputLabel>
+            <InputLabel>
+              Surname :
+              <InputField
+                type="text"
+                value={surname}
+                onChange={handleChangeSurName}
+                required
+              />
+            </InputLabel>
+            <InputLabel>
+              Pseudo :
+              <InputField
+                type="text"
+                value={pseudo}
+                onChange={handleChangePseudo}
+                required
+              />
+            </InputLabel>
+            <Email>Email : {email}</Email>
+            <input type="submit" value="Envoyer" />
+          </Form>
+        </RegisterContainer>
+      </Container>
+    );
+  }
 };
+
+const Container = styled.div`
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  align-items: center;
+  height: 70vh;
+  width: 100vw;
+`;
+
+const RegisterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+  /* background-color: red; */
+  width: 800px;
+  background-color: pink;
+  height: 400px;
+`;
+
+const RegisterMessage = styled.h1`
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #e34665;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: space-between;
+  /* width: 800px; */
+  background-color: pink;
+`;
+
+const InputLabel = styled.label`
+  color: #e34665;
+  display: block;
+  top: 27px;
+  left: 55px;
+  background: #ffffff;
+  transition: 300ms;
+  background-color: pink;
+  margin-bottom: 5px;
+`;
+const InputField = styled.input`
+  outline: none;
+  display: block;
+  color: #3777ff;
+  padding: 16px 22px;
+  border: 1px solid #dadce0;
+  font-size: 18px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 350px;
+  background-color: white;
+`;
+
+const Email = styled.p`
+  margin-bottom: 30px;
+  color: #e34665;
+`;
 
 export default Register;

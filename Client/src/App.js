@@ -13,6 +13,8 @@ import Movie from "./movie";
 import MovieList from "./movieList";
 import Prediction from "./prediction";
 import GlobalStyles from "./GlobalStyles";
+import SearchQuery from "./SearchContainer";
+import Footer from "./Footer";
 
 function App() {
   const { setAuth0Email } = useContext(CurrentUserContext);
@@ -53,8 +55,12 @@ function App() {
         <Route path="/prediction">
           <Prediction />
         </Route>
+        <Route path="/zzz">
+          <SearchQuery />
+        </Route>
       </Switch>
       {/* </Main> */}
+      <Footer />
     </Auth0ProviderWithHistory>
   );
 }
