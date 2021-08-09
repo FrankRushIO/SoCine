@@ -34,26 +34,55 @@ const Recommendations = ({ id }) => {
   else {
     return (
       <div>
-        {recommendations.map((movie, index) => {
-          return (
-            <div>
-              <Link to={`/movie/${recommendations[index].id}`}>
-                <p>{movie.title}</p>
-              </Link>
-              <Poster
-                src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
-                alt="Movie poster"
-              />
-            </div>
-          );
-        })}
+        <RecommandationsContainer>
+          {recommendations.map((movie, index) => {
+            return (
+              <Movie>
+                <Link
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    height: "20px",
+                  }}
+                  to={`/movie/${recommendations[index].id}`}
+                >
+                  <Title>{movie.title}</Title>
+                </Link>
+                <Poster
+                  src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
+                  alt="Movie poster"
+                />
+              </Movie>
+            );
+          })}
+        </RecommandationsContainer>
       </div>
     );
   }
 };
 
+const RecommandationsContainer = styled.div`
+  display: flex;
+  max-width: 1200px;
+  overflow-x: scroll;
+  padding-right: 5px;
+  padding-left: 5px;
+`;
+
+const Movie = styled.div`
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+`;
+const Title = styled.span`
+  font-size: 10px;
+
+  min-height: 15px;
+`;
 const Poster = styled.img`
   width: 100px;
+  position: relative;
+  border-radius: 5px;
 `;
 
 export default Recommendations;

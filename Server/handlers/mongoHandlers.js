@@ -55,6 +55,30 @@ const getUserByEmail = async (req, res) => {
   console.log("disconnected!");
 };
 
+const getUserByPseudo = async (req, res) => {
+  const dbName = "SoCine";
+  const client = new MongoClient(MONGO_URI, options);
+
+  const pseudo = req.params.pseudo;
+  console.log(pseudo);
+  try {
+    await client.connect();
+    const db = client.db(dbName);
+    console.log("connected!");
+
+    const result = await db.collection("Users").findOne({ pseudo: pseudo });
+    console.log(result);
+    result
+      ? res.status(200).json({ status: 200, data: result })
+      : res.status(404).json({ status: 404, data: "Not Found" });
+  } catch (err) {
+    console.log(err.stack);
+    res.status(500).json({ status: 400, message: "nopeeee" });
+  }
+  client.close();
+  console.log("disconnected!");
+};
+
 const getUserById = async (req, res) => {
   const dbName = "SoCine";
   // creates a new client
@@ -148,4 +172,5 @@ module.exports = {
   getUserById,
   getUsers,
   updateLikedMovies,
+  getUserByPseudo,
 };

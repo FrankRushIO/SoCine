@@ -1,16 +1,24 @@
 import { createGlobalStyle } from "styled-components";
 
+export const themeVars = {
+  paradisePink: "#E34665",
+  spaceCadet: "#2D3142",
+  silver: "#bfc0c0",
+  white: "#FFFFFF",
+  blueCrayola: "#3777ff",
+};
+
 export default createGlobalStyle`
 :root {
-    --steel-blue: #407EC9;
-    --pale-cerulean: #92C1E9;
-    --royal-blue: #00205B;
-    --green-blue: #4F8EBA;
-    --beau-blue: #CAD5E3;
-    --font-existence: "Oswald", sans-serif;
+    --paradise-pink: #E34665;
+    --space-cadet: #2D3142;
+    --silver: #bfc0c0;
+    --white: #FFFFFF;
+    --blue-crayola: #3777ff;
+    --font-existence: 'Atkinson Hyperlegible', sans-seriff;
    
   body{
-      background-color: white
+      background-color: #FFFFFF;
         }
 }
 html, body, div, span, applet, object, iframe,
@@ -29,7 +37,7 @@ html, body, div, span, applet, object, iframe,
         margin: 0;
         padding: 0;
         border: 0;
-        font-size: 100%;
+        font-size: 101%;
         vertical-align: baseline;
         box-sizing: border-box;
         background:transparent;
