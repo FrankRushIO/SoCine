@@ -15,6 +15,9 @@ import Prediction from "./prediction";
 import GlobalStyles from "./GlobalStyles";
 import SearchQuery from "./SearchContainer";
 import Footer from "./Footer";
+import Contact from "./Contact";
+import HelpCenter from "./HelpCenter";
+import CompanyInfo from "./CompanyInfo";
 
 function App() {
   const { setAuth0Email } = useContext(CurrentUserContext);
@@ -55,8 +58,14 @@ function App() {
         <Route path="/prediction">
           <Prediction />
         </Route>
-        <Route path="/zzz">
-          <SearchQuery />
+        <Route path="/contact">
+          <Contact />
+        </Route>
+        <Route path="/helpcenter">
+          <HelpCenter />
+        </Route>
+        <Route path="/companyinfo">
+          <CompanyInfo />
         </Route>
       </Switch>
       {/* </Main> */}
