@@ -7,7 +7,6 @@ const request = require("request-promise");
 const Recommendations = ({ id }) => {
   const [recommendations, setRecommendations] = useState(null);
 
-  console.log(id);
   const handleSearch = () => {
     return request(
       `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=a56759345cdd5a5d3830b778270ea182&language=en-US&page=1`
@@ -18,7 +17,6 @@ const Recommendations = ({ id }) => {
           message: parsedResponse,
         };
         const recommendation = searchResults.message.results;
-        // console.log(recommendation);
         setRecommendations(recommendation);
         return searchResults;
       })

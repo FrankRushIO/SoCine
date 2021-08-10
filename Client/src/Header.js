@@ -56,7 +56,6 @@ export const SearchBar = () => {
   // const request = require("request-promise");
 
   const handleSearchInput = (ev) => {
-    console.log(searchInput);
     setSearchInput(ev.target.value);
   };
 

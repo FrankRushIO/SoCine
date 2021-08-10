@@ -10,6 +10,8 @@ export const CurrentUserProvider = ({ children }) => {
   const history = useHistory();
   const [likedMovies, setLikedMovies] = useState([]);
   const [likeAction, setLikeAction] = useState(undefined);
+  const [following, setFollowing] = useState(undefined);
+  const [followAction, setFollowAction] = useState(undefined);
 
   // Handles like actions
   useEffect(() => {
@@ -34,27 +36,6 @@ export const CurrentUserProvider = ({ children }) => {
     }
   }, [likeAction]);
 
-  const getFirstRecommendation = async (id) => {
-    console.log(id);
-    try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=a56759345cdd5a5d3830b778270ea182&language=en-US&page=1`
-      );
-      const parsedResponse = await response.json();
-      console.log(parsedResponse);
-      const movie = {
-        title: parsedResponse.results[0].title,
-        posterPath: `https://image.tmdb.org/t/p/w185/${parsedResponse.results[0].poster_path}`,
-        genre: parsedResponse.results[0].genres,
-        id: parsedResponse.results[0].id,
-      };
-      console.log(movie);
-      return movie;
-    } catch (err) {
-      console.log("error", err);
-    }
-  };
-
   // This will set all the current liked movie objects into the state
   useEffect(() => {
     const getAll = async (allPromises) => {
@@ -77,7 +58,6 @@ export const CurrentUserProvider = ({ children }) => {
         `https://api.themoviedb.org/3/movie/${id}?api_key=a56759345cdd5a5d3830b778270ea182`
       );
       const parsedResponse = await response.json();
-      // console.log(parsedResponse);
       const movie = {
         title: parsedResponse.title,
         posterPath: `https://image.tmdb.org/t/p/w185/${parsedResponse.poster_path}`,
@@ -85,7 +65,82 @@ export const CurrentUserProvider = ({ children }) => {
         id: parsedResponse.id,
         recommendation: await getFirstRecommendation(parsedResponse.id),
       };
-      // console.log(movie);
+      return movie;
+    } catch (err) {
+      console.log("error", err);
+    }
+  };
+
+  useEffect(() => {
+    if (followAction) {
+      if (followAction.isFollowed === "follow") {
+        setCurrentUser({
+          // remove setCurrentUser and put setLikedmovies instead
+          ...currentUser,
+          following: [...currentUser.following, followAction.userId],
+        });
+      } else if (followAction.isFollowed === "unfollow") {
+        const index = currentUser.following.indexOf(followAction.userId);
+        setCurrentUser((currentUser) => {
+          const temp = [...currentUser.following];
+          temp.splice(index, 1);
+          return {
+            ...currentUser,
+            following: [...temp],
+          };
+        });
+      }
+    }
+  }, [followAction]);
+
+  useEffect(() => {
+    const getAllFollowing = async (allPromises) => {
+      const values = await Promise.all(allPromises);
+      setFollowing(values);
+    };
+
+    if (currentUser && currentUser.following) {
+      const promiseArray = currentUser.following.map((id) => {
+        console.log("followinggg");
+        return findFollowing(id);
+      });
+      getAllFollowing(promiseArray);
+    }
+    console.log("nopee");
+  }, [currentUser]);
+
+  const findFollowing = (id) => {
+    console.log(id);
+    fetch(`/pseudo/${id}`)
+      // When the data is received, update currentUser
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.data);
+        if (data.data === "Not Found") {
+          console.log("Not Found");
+        } else {
+          const following = data.data;
+          return following;
+        }
+      })
+      .catch((err) => {
+        // setStatus("error");
+      });
+  };
+
+  const getFirstRecommendation = async (id) => {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=a56759345cdd5a5d3830b778270ea182&language=en-US&page=1`
+      );
+      const parsedResponse = await response.json();
+
+      const movie = {
+        title: parsedResponse.results[0].title,
+        posterPath: `https://image.tmdb.org/t/p/w185/${parsedResponse.results[0].poster_path}`,
+        genre: parsedResponse.results[0].genres,
+        id: parsedResponse.results[0].id,
+      };
       return movie;
     } catch (err) {
       console.log("error", err);
@@ -98,7 +153,6 @@ export const CurrentUserProvider = ({ children }) => {
         // When the data is received, update currentUser
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.data);
           if (data.data === "Not Found") {
             history.push(`/register`);
           } else {
@@ -125,6 +179,10 @@ export const CurrentUserProvider = ({ children }) => {
         setLikedMovies,
         likeAction,
         setLikeAction,
+        followAction,
+        setFollowAction,
+        following,
+        setFollowing,
       }}
     >
       {children}

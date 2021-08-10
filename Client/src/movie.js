@@ -9,13 +9,10 @@ const Movie = () => {
   const { currentUser, setLikeAction, likedMovies } =
     useContext(CurrentUserContext);
   const imported = useParams();
-  console.log(imported);
   const searchInput = Object.values(imported)[0];
-  console.log(searchInput);
   const request = require("request-promise");
   const [movie, setMovie] = useState("");
   const [isLiked, setIsLiked] = useState(false);
-  console.log(currentUser);
 
   const handleSearch = () => {
     return request(
@@ -26,7 +23,6 @@ const Movie = () => {
         const searchResults = {
           message: parsedResponse,
         };
-        console.log(parsedResponse);
         setMovie(parsedResponse);
         return searchResults;
       })
@@ -37,16 +33,10 @@ const Movie = () => {
 
   const handleClickLike = () => {
     let type = "";
-    console.log(currentUser._id);
     if (isLiked) {
-      // const index = currentUser.likedMovies.indexOf(searchInput);
-      // console.log(index);
-      // currentUser.likedMovies.splice(index, 1);
-      console.log(currentUser.likedMovies);
       type = "unlike";
       setLikeAction({ isLiked: "unlike", movieId: searchInput });
     } else {
-      // currentUser.likedMovies.push(searchInput);
       type = "like";
       setLikeAction({ isLiked: "like", movieId: searchInput });
     }
@@ -69,15 +59,12 @@ const Movie = () => {
 
   useEffect(() => {
     handleSearch();
-    console.log(currentUser);
     if (currentUser) {
       verifyLike();
     }
   }, [currentUser, imported]);
 
   const verifyLike = () => {
-    console.log(currentUser);
-    console.log(currentUser.likedMovies);
     if (!currentUser || currentUser.likedMovies === []) {
       setIsLiked(false);
     } else {
@@ -103,8 +90,6 @@ const Movie = () => {
 
   if (movie === "") return <div>Loading</div>;
   else {
-    console.log(movie);
-
     return (
       <MoviePage>
         <MovieContainer

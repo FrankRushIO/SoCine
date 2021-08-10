@@ -14,7 +14,6 @@ const options = {
 // MongoDB handlers
 const createUser = async (req, res) => {
   const dbName = "SoCine";
-  console.log(MONGO_URI);
   const client = new MongoClient(MONGO_URI, options);
 
   try {
@@ -167,6 +166,40 @@ const updateLikedMovies = async (req, res) => {
   }
 };
 
+const updateFollowing = async (req, res) => {
+  const dbName = "SoCine";
+  // creates a new client
+  const client = new MongoClient(MONGO_URI, options);
+  const id = req.params.id;
+  console.log("id:", id);
+  console.log(req.body);
+
+  try {
+    await client.connect();
+    const db = client.db(dbName);
+    console.log("connected");
+    if (req.body.type === "follow") {
+      await db
+        .collection("Users")
+        .updateOne({ _id: id }, { $addToSet: { following: req.body.userId } });
+    } else {
+      await db
+        .collection("Users")
+        .updateOne({ _id: id }, { $pull: { following: req.body.userId } });
+    }
+
+    client.close();
+    console.log(`disconnected from ${dbName}`);
+    res.status(200).json({
+      status: 200,
+      message: "change made",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: 500, message: err.message });
+  }
+};
+
 const getAllFaqs = (req, res) => {
   res.status(200).json({ status: 200, data: faqs });
 };
@@ -179,4 +212,5 @@ module.exports = {
   updateLikedMovies,
   getUserByPseudo,
   getAllFaqs,
+  updateFollowing,
 };

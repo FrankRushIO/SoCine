@@ -18,9 +18,6 @@ const MovieList = () => {
     )
       .then((response) => JSON.parse(response))
       .then((parsedResponse) => {
-        // console.log(parsedResponse);
-        // console.log(REACT_APP_TMDB_KEY);
-        // console.log(parsedResponse.results);
         setResults(parsedResponse.results);
         const searchResults = {
           message: parsedResponse.results,

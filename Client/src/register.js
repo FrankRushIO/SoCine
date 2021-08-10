@@ -13,6 +13,8 @@ const Register = () => {
   const email = auth0Email.email;
   const history = useHistory();
   const likedMovies = [];
+  const following = [];
+  const followedBy = [];
   const _id = uuidv4();
   const [pseudoAvailable, setPseudoAvailable] = useState(false);
 
@@ -29,36 +31,16 @@ const Register = () => {
   };
 
   const handleSubmit = (ev) => {
-    // if (pseudo.length <= 3) alert("Pseudo is not long enough");
-    // else {
-    // console.log(pseudo);
-    // if (pseudo.length >= 3) {
-    //   fetch(`/user/pseudo/${pseudo}`)
-    //     // When the data is received, update currentUser
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log(data.data);
-    //       if (data.data === "Not Found") {
-    //         setPseudoAvailable(false);
-    //         alert("Pseudo is already taken");
-    //         history.push("/");
-    //       } else {
-    //         setPseudoAvailable(true);
-    //         console.log("pseudo not taken");
-    //         submit();
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log("error");
-    //     });
-    // } else {
-    //   alert("The pseudo is not long enough");
-    // }
-
-    // const submit = () => {
-    //   if (pseudoAvailable) {
-    const newUser = { givenName, surname, pseudo, email, likedMovies, _id };
-    console.log(newUser);
+    const newUser = {
+      givenName,
+      surname,
+      pseudo,
+      email,
+      likedMovies,
+      _id,
+      following,
+      followedBy,
+    };
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -75,12 +57,6 @@ const Register = () => {
       });
     alert("Le nom a été soumis : " + givenName + surname + pseudo);
     ev.preventDefault();
-    //   } else {
-    //     console.log("some infos are wrong");
-    //     history.push("/");
-    //   }
-    // };
-    // }
   };
 
   if (!auth0Email) return <div>Loading...</div>;

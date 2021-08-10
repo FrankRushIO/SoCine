@@ -12,10 +12,6 @@ const Prediction = () => {
   const [movieId, setMovieId] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
 
-  useEffect(() => {
-    console.log(recommendations);
-  }, [recommendations]);
-
   const mostFrequent = (arr, n) => {
     {
       // Sort the array
@@ -61,42 +57,6 @@ const Prediction = () => {
     }
     return result;
   }
-  // useEffect(() => {
-  //   const movieIds = likedMovies.map((movie) => {
-  //     return movie.id;
-  //   });
-  //   setMovieId(movieIds);
-  // }, []);
-
-  // console.log(movieIds);
-
-  // useEffect(() => {
-  //   if (movieId.length <= 3) {
-  //     console.log("hey", movieId);
-  //     return <div>Loading</div>;
-  //   } else {
-  //     console.log(movieId);
-  //     const randomMovieIds = getRandom(movieId, 4);
-  //     console.log(randomMovieIds);
-  //     randomMovieIds.forEach((id) => {
-  //       console.log(id);
-  //       fetch(
-  //         `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=a56759345cdd5a5d3830b778270ea182&language=en-US&page=1`
-  //       )
-  //         // When the data is received, update currentUser
-  //         .then((res) => res.json())
-  //         .then((data) => {
-  //           console.log(data);
-  //           const result = data.results[0].title;
-  //           console.log(result);
-  //           setRecommendations([...recommendations, result]);
-  //         })
-  //         .catch((err) => {
-  //           console.log("error");
-  //         });
-  //     });
-  //   }
-  // }, [movieId]);
 
   useEffect(() => {
     likedMovies.map((movie) => {
@@ -115,7 +75,6 @@ const Prediction = () => {
       // When the data is received, update currentUser
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         let array = getRandom(data.results, 3);
         setPopularMovies(array);
       })
@@ -131,7 +90,6 @@ const Prediction = () => {
       // When the data is received, update currentUser
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         let array = getRandom(data.results, 3);
         setGenreMovies(array);
         return array;
@@ -145,9 +103,6 @@ const Prediction = () => {
     return <div>Loading</div>;
   } else {
     const randomMovies = getRandom(likedMovies, 3);
-    console.log(randomMovies);
-    console.log(randomMovies[0].recommendation);
-    console.log(popularMovies);
     return (
       <Container>
         <TagLine>Movies recommended from movies you've seen</TagLine>
