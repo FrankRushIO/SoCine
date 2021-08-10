@@ -1,22 +1,48 @@
 import React, { useContext, useEffect, useState } from "react";
 import { generatePath } from "react-router-dom";
+import { useParams } from "react-router";
 import { CurrentUserContext } from "./CurrentUserContext";
 import styled from "styled-components";
+import Wall from "./Wall";
 
 const Profile = () => {
   const { currentUser, likedMovies } = useContext(CurrentUserContext);
+  const [profileUser, setProfileUser] = useState("");
+  const [profile, setProfileStatus] = useState("");
+  const imported = useParams();
+  console.log(imported);
+  const profileId = Object.values(imported)[0];
 
-  if (currentUser?.pseudo) {
+  useEffect(() => {
+    fetch(`/users/${profileId}`)
+      // When the data is received, update currentUser
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.data);
+        if (data.data === "Not Found") {
+          console.log("Not Found");
+        } else {
+          console.log(data);
+          setProfileUser(data.data);
+        }
+      })
+      .catch((err) => {
+        // setStatus("error");
+      });
+  }, [profileId]);
+
+  if (profileUser?.pseudo) {
+    console.log(profileUser);
     return (
       <Container>
-        <Greeting>{currentUser.pseudo}'s profile</Greeting>
+        <Greeting>{profileUser.pseudo}'s profile</Greeting>
         <UserInfoDiv>
           <Avatar />
           <UserInfo>
-            <div>Given Name: {currentUser.givenName}</div>
-            <div>Surname : {currentUser.surname}</div>
-            <div>Pseudo: {currentUser.pseudo}</div>
-            <div>Email: {currentUser.email}</div>
+            <div>Given Name: {profileUser.givenName}</div>
+            <div>Surname : {profileUser.surname}</div>
+            <div>Pseudo: {profileUser.pseudo}</div>
+            <div>Email: {profileUser.email}</div>
           </UserInfo>
           <Statistics>
             Statistics
@@ -27,9 +53,9 @@ const Profile = () => {
             </div>
           </Statistics>
         </UserInfoDiv>
-
+        <Wall profileUser={profileUser} />
         <LikedMovieContainer>
-          {/* <div>Liked movies : {currentUser.likedMovies}</div> */}
+          <div>Liked movies : {profileUser.likedMovies.length}</div>
           {likedMovies.map((movie) => {
             return (
               <LikedMovie>

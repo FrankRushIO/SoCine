@@ -1,27 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "./SoCine.png";
 import AuthNav from "./Authentification/auth-nav";
+import { CurrentUserContext } from "./CurrentUserContext";
 
 // const { REACT_APP_TMDB_KEY } = process.env;
 
 const Header = () => {
+  const { currentUser } = useContext(CurrentUserContext);
+
   return (
     <Container>
       <StyledLogo src={Logo} alt="logo" />
-
       <Center>
         <NavItem>
           <StyledNavLink className="navitem" to="/">
             HomePage
           </StyledNavLink>
         </NavItem>
-        <NavItem>
-          <StyledNavLink className="navitem" to="/profile">
-            Profile
-          </StyledNavLink>
-        </NavItem>
+        {currentUser ? (
+          <NavItem>
+            <StyledNavLink
+              className="navitem"
+              to={`/profile/${currentUser._id}`}
+            >
+              Profile
+            </StyledNavLink>
+          </NavItem>
+        ) : (
+          <div>Profile (not connect)</div>
+        )}
+
         <NavItem>
           <StyledNavLink className="navitem" exact to="/prediction">
             Recommendations

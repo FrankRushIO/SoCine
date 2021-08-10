@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { CurrentUserContext } from "./CurrentUserContext";
 
@@ -33,14 +34,20 @@ const Users = () => {
         <SearchUser />
         <Wrapper>
           {users.data.map((user) => {
+            console.log(user._id);
             return (
-              <User>
-                {" "}
-                <Surname>{user.surname}</Surname>
-                <Name>{user.givenName}</Name>
-                <Pseudo>{user.pseudo}</Pseudo>
-                <Avatar>{user.pseudo.substring(0, 1)}</Avatar>
-              </User>
+              <NavLink
+                style={{ textDecoration: "none", color: "black" }}
+                to={`/profile/${user._id}`}
+              >
+                <User>
+                  {" "}
+                  <Surname>{user.surname}</Surname>
+                  <Name>{user.givenName}</Name>
+                  <Pseudo>{user.pseudo}</Pseudo>
+                  <Avatar>{user.pseudo.substring(0, 1)}</Avatar>
+                </User>
+              </NavLink>
             );
           })}
         </Wrapper>
@@ -116,7 +123,7 @@ const Avatar = styled.span`
   justify-content: center;
   width: 100px;
   height: 100px;
-  background-color: red;
+  background-color: pink;
   font-size: 40px;
 `;
 
