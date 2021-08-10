@@ -15,6 +15,7 @@ const Register = () => {
   const likedMovies = [];
   const following = [];
   const followedBy = [];
+  const comments = [];
   const _id = uuidv4();
   const [pseudoAvailable, setPseudoAvailable] = useState(false);
 
@@ -40,6 +41,7 @@ const Register = () => {
       _id,
       following,
       followedBy,
+      comments,
     };
     const requestOptions = {
       method: "POST",

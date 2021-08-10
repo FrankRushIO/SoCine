@@ -44,7 +44,9 @@ function App() {
         <Route exact path="/">
           <HomePage />
         </Route>
-        <ProtectedRoute exact path="/profile" component={Profile} />
+        <Route path="/profile/:id">
+          <Profile />
+        </Route>
         <Route exact path="/register">
           <Register />
         </Route>

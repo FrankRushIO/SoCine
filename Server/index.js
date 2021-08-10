@@ -14,6 +14,7 @@ const {
   getUserByPseudo,
   getAllFaqs,
   updateFollowing,
+  updateComments,
 } = require("./handlers/mongoHandlers");
 
 const PORT = 4000;
@@ -38,10 +39,12 @@ express()
 
   .post("/createUser", createUser)
   .get("/profile/users/:email", getUserByEmail)
-  .get("/user/:id", getUserById)
+  .get("/users/:_id", getUserById)
   .get("/users", getUsers)
   .patch("/user/:id", updateLikedMovies)
   .get("/pseudo/:pseudo", getUserByPseudo)
   .get("/faqs", getAllFaqs)
   .patch("/following/:id", updateFollowing)
+  .patch("/following/:id", updateFollowing)
+  .patch("/comments/:id", updateComments)
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
