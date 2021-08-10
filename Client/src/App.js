@@ -72,7 +72,7 @@ function App() {
         <Route path="/users">
           <Users />
         </Route>
-        <Route path="/pseudo">
+        <Route path="/pseudo/:pseudo">
           <User />
         </Route>
       </Switch>

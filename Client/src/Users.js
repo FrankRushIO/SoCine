@@ -64,7 +64,7 @@ const SearchUser = () => {
       ev.preventDefault();
       alert("Your search term has to be at least 3 characters long");
     } else {
-      history.push(`/pseudo?name=${searchInput}`);
+      history.push(`/pseudo/${searchInput}`);
       history.go(0);
     }
   };
