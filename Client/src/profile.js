@@ -149,7 +149,7 @@ const Profile = () => {
                   <Poster src={movie.posterPath} alt="Movie Poster" />
                   <Genres>
                     {movie.genre.map((genre, index) => {
-                      return <div key={index}>{genre.name} </div>;
+                      return <span key={index}>{genre.name} </span>;
                     })}
                   </Genres>
                 </Link>
@@ -238,7 +238,7 @@ const LikedMovie = styled.div`
   min-height: 440px;
   border: 2px white solid;
   border-radius: 15px;
-  background-color: #e3667f;
+  background-color: #47d1ff;
   margin: 5px;
   &:hover {
     opacity: 60%;
@@ -259,7 +259,7 @@ const Genres = styled.div`
   min-height: 85px;
   flex-direction: column;
   color: white;
-  background-color: #c98290;
+  /* background-color: #white; */
   border-radius: 10px;
 `;
 
