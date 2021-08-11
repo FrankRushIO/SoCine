@@ -1,6 +1,7 @@
 import react, { useState, useContext, useEffect } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
 import styled from "styled-components";
+import Loading from "./Loading";
 
 const Prediction = () => {
   const { currentUser, likedMovies, mostPopularGenreId } =
@@ -59,6 +60,7 @@ const Prediction = () => {
   }
 
   useEffect(() => {
+    console.log(likedMovies);
     likedMovies.map((movie) => {
       return movie.genre.map((genre) => {
         return genreArray.push(genre.id);
@@ -100,7 +102,7 @@ const Prediction = () => {
   }, [genreId]);
 
   if (likedMovies.length === 0) {
-    return <div>Loading</div>;
+    return <Loading />;
   } else {
     const randomMovies = getRandom(likedMovies, 3);
     return (

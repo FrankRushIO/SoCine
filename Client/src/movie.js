@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Recommendations from "./recommendation";
+import Loading from "./Loading";
 
 const Movie = () => {
   const { currentUser, setLikeAction, likedMovies } =
@@ -20,6 +21,7 @@ const Movie = () => {
     )
       .then((response) => JSON.parse(response))
       .then((parsedResponse) => {
+        console.log(parsedResponse);
         const searchResults = {
           message: parsedResponse,
         };
@@ -88,7 +90,7 @@ const Movie = () => {
     return rhours + "h " + rminutes + "m";
   };
 
-  if (movie === "") return <div>Loading</div>;
+  if (movie === "") return <Loading />;
   else {
     return (
       <MoviePage>

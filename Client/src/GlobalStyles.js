@@ -19,6 +19,7 @@ export default createGlobalStyle`
    
   body{
       background-color: #FFFFFF;
+      min-height: 1000px;
         }
 }
 html, body, div, span, applet, object, iframe,

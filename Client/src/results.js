@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 // import { SearchBar } from "./Header";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Loading from "./Loading";
 
 const Results = () => {
   const imported = useParams();
@@ -73,7 +74,7 @@ const Results = () => {
           );
         })
       ) : (
-        <div>loading</div>
+        <Loading />
       )}
     </Container>
   );

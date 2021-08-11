@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { CurrentUserContext } from "./CurrentUserContext";
+import Loading from "./Loading";
 
 const MovieList = () => {
   const imported = useParams();
@@ -30,7 +31,7 @@ const MovieList = () => {
   };
 
   handleSearch();
-  if (!currentUser) return <div>Loading</div>;
+  if (!currentUser) return <Loading />;
   else {
     console.log(currentUser.likedMovies);
   }
@@ -58,7 +59,7 @@ const MovieList = () => {
           );
         })
       ) : (
-        <div>loading</div>
+        <Loading />
       )}
     </div>
   );

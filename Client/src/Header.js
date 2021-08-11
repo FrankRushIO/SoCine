@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "./SoCine.png";
@@ -9,6 +9,10 @@ import { CurrentUserContext } from "./CurrentUserContext";
 
 const Header = () => {
   const { currentUser } = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
 
   return (
     <Container>
@@ -21,6 +25,7 @@ const Header = () => {
         </NavItem>
         {currentUser ? (
           <NavItem>
+            {console.log(currentUser._id)}
             <StyledNavLink
               className="navitem"
               to={`/profile/${currentUser._id}`}
@@ -29,12 +34,17 @@ const Header = () => {
             </StyledNavLink>
           </NavItem>
         ) : (
-          <div>Profile (not connect)</div>
+          <div>Profile (not connected)</div>
         )}
 
         <NavItem>
           <StyledNavLink className="navitem" exact to="/prediction">
             Recommendations
+          </StyledNavLink>
+        </NavItem>
+        <NavItem>
+          <StyledNavLink className="navitem" exact to="/users">
+            Users
           </StyledNavLink>
         </NavItem>
       </Center>
