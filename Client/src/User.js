@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
 import { useLocation, NavLink, useHistory } from "react-router-dom";
 import { useParams } from "react-router";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { UsersContext } from "./UsersContext";
 import { SearchBar } from "./Header";
 import Loading from "./Loading";
+import { slideInRight } from "react-animations";
 
 const Search = () => {
   const { currentUser, followAction, setFollowAction } =
@@ -90,7 +91,10 @@ const Search = () => {
 
   return (
     <Page>
-      <Title>Votre recherche : {searchInput}</Title>
+      <Title>
+        Votre recherche : <TitrePseudo>{searchInput}</TitrePseudo>
+      </Title>
+
       <User>
         <NavLink
           style={{ textDecoration: "none", color: "black" }}
@@ -102,14 +106,16 @@ const Search = () => {
             <Avatar src={user.avatar} />
           </div>
         </NavLink>
-        <button onClick={handleClickFollow}>
-          {!isFollowed ? "Follow " : "UnFollow "}
+        <Button onClick={handleClickFollow}>
+          {!isFollowed ? "Follow " : "Unfollow "}
           user
-        </button>
+        </Button>
       </User>
     </Page>
   );
 };
+
+const slideAnimationRight = keyframes`${slideInRight}`;
 
 const Page = styled.div`
   min-height: 750px;
@@ -118,6 +124,11 @@ const Page = styled.div`
 const Title = styled.div`
   font-size: 30px;
   margin-left: 30px;
+`;
+
+const TitrePseudo = styled.span`
+  color: red;
+  animation: 1.5s ${slideAnimationRight};
 `;
 
 const User = styled.div`
@@ -138,8 +149,26 @@ const Pseudo = styled.div`
 
 const Avatar = styled.img`
   border-radius: 50%;
+  transition: all 0.2s;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  &:hover {
+    opacity: 80%;
+  }
+`;
+
+const Button = styled.button`
+  margin-top: 10px;
+  background-color: transparent;
+  color: white;
+  padding: 0.2rem 1rem 0.2rem 1rem;
+  border-radius: 5px;
+  border: 1px white solid;
+  transition: all 0.2s;
+  &:hover {
+    border-color: pink;
+    color: pink;
+  }
 `;
 export default Search;

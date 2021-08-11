@@ -78,7 +78,7 @@ const Register = () => {
       .catch((error) => {
         console.log(error);
       });
-    alert("Le nom a été soumis : " + givenName + surname + pseudo);
+    alert("Thanks " + pseudo + ", your account is now registered!");
     ev.preventDefault();
   };
 
@@ -197,8 +197,9 @@ const Label = styled.label``;
 
 const Input = styled.input`
   height: 100px;
+  transition: all 0.4s;
   &:checked + ${Label} {
-    background: grey;
+    background: pink;
     border-radius: 50%;
   }
 `;
@@ -233,6 +234,7 @@ const Container = styled.div`
   align-items: center;
   height: 70vh;
   width: 100vw;
+  margin-bottom: 100px;
 `;
 
 const RegisterContainer = styled.div`
@@ -242,8 +244,9 @@ const RegisterContainer = styled.div`
   justify-content: center;
   align-items: center;
   align-content: stretch;
-  /* background-color: red; */
-  width: 800px;
+  width: 700px;
+  padding: 20px;
+  margin-bottom: 30px;
   background-color: white;
   border-radius: 20px;
   height: 900px;

@@ -146,8 +146,9 @@ const User = styled.div`
   flex-direction: column;
   align-items: center;
   width: 150px;
-  /* border: 1px black solid; */
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   margin-left: 30px;
   margin-top: 30px;
 

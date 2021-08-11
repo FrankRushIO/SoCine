@@ -235,7 +235,7 @@ const LikedMovie = styled.div`
   flex-direction: column;
   align-items: center;
   width: 300px;
-  min-height: 420px;
+  min-height: 440px;
   border: 2px white solid;
   border-radius: 15px;
   background-color: #e3667f;
