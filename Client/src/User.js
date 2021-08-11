@@ -89,24 +89,57 @@ const Search = () => {
   };
 
   return (
-    <div>
-      <div>Votre recherche : {searchInput}</div>
-      <NavLink
-        style={{ textDecoration: "none", color: "black" }}
-        to={`/profile/${user._id}`}
-      >
-        <div>
-          {" "}
-          <div>{user.pseudo}</div>
-          <img src={user.avatar} />
-        </div>
-      </NavLink>
-      <button onClick={handleClickFollow}>
-        {!isFollowed ? "Follow " : "UnFollow "}
-        user
-      </button>
-    </div>
+    <Page>
+      <Title>Votre recherche : {searchInput}</Title>
+      <User>
+        <NavLink
+          style={{ textDecoration: "none", color: "black" }}
+          to={`/profile/${user._id}`}
+        >
+          <div>
+            {" "}
+            <Pseudo>{user.pseudo}</Pseudo>
+            <Avatar src={user.avatar} />
+          </div>
+        </NavLink>
+        <button onClick={handleClickFollow}>
+          {!isFollowed ? "Follow " : "UnFollow "}
+          user
+        </button>
+      </User>
+    </Page>
   );
 };
 
+const Page = styled.div`
+  min-height: 750px;
+`;
+
+const Title = styled.div`
+  font-size: 30px;
+  margin-left: 30px;
+`;
+
+const User = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Pseudo = styled.div`
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 200px;
+  /* background-color: red; */
+  justify-content: center;
+  display: flex;
+  align-items: center;
+`;
+
+const Avatar = styled.img`
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+`;
 export default Search;

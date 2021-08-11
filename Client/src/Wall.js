@@ -67,16 +67,21 @@ const Wall = ({ profileUser }) => {
   return (
     <WallContainer>
       {currentUser?.pseudo ? (
-        <Container>
+        <Container
+          style={{
+            backgroundImage: `linear-gradient(to right, rgba(0, 224, 255, 1), rgba(0, 133, 255, 1))`,
+          }}
+        >
           <Title>{currentUser.pseudo}'s Wall</Title>
           {displayComments()}
           <Form onSubmit={handleSubmit}>
             <InputLabel>
-              Comment on {profileUser.pseudo}'s wall:
+              Comment on {profileUser.pseudo}'s wall (100 characters limit)
               <InputField
                 type="text"
                 onChange={handleChangeComment}
                 value={comment}
+                maxLength="100"
                 required
               />
             </InputLabel>
@@ -131,6 +136,8 @@ const Comment = styled.span`
   background-color: #ffcccb;
   border-radius: 4px;
   padding: 1px;
+  max-width: 300px;
+  border: 1px solid black;
 `;
 const Form = styled.form`
   display: flex;

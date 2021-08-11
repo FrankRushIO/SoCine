@@ -101,8 +101,13 @@ const Prediction = () => {
       });
   }, [genreId]);
 
-  if (likedMovies.length === 0) {
-    return <Loading />;
+  if (likedMovies.length < 3) {
+    return (
+      <div>
+        You have not liked enough movies to receive recommendations, please like
+        at least 3 movies.
+      </div>
+    );
   } else {
     const randomMovies = getRandom(likedMovies, 3);
     return (

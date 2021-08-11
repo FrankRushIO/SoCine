@@ -35,33 +35,39 @@ const Users = () => {
   } else {
     console.log(users);
     return (
-      <BigContainer>
-        <SearchUser />
-        <Wrapper>
-          {users.data.map((user) => {
-            console.log(user._id);
-            return (
-              <UserDiv>
-                <NavLink
-                  style={{ textDecoration: "none", color: "black" }}
-                  to={`/profile/${user._id}`}
-                >
-                  <User>
-                    {" "}
-                    <Avatar src={user.avatar} />
-                    <Pseudo>{user.pseudo}</Pseudo>
-                  </User>
-                </NavLink>
-              </UserDiv>
-            );
-          })}
-        </Wrapper>
-      </BigContainer>
+      <Page>
+        <BigContainer>
+          <SearchUser />
+          <Wrapper>
+            {users.data.map((user) => {
+              console.log(user._id);
+              return (
+                <UserDiv>
+                  <NavLink
+                    style={{ textDecoration: "none", color: "black" }}
+                    to={`/profile/${user._id}`}
+                  >
+                    <User>
+                      {" "}
+                      <Avatar src={user.avatar} />
+                      <Pseudo>{user.pseudo}</Pseudo>
+                    </User>
+                  </NavLink>
+                </UserDiv>
+              );
+            })}
+          </Wrapper>
+        </BigContainer>
+      </Page>
     );
   }
 };
 
 const UserDiv = styled.div``;
+
+const Page = styled.div`
+  min-height: 750px;
+`;
 
 const SearchUser = () => {
   const [searchInput, setSearchInput] = useState("");

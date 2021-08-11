@@ -56,8 +56,8 @@ const Footer = () => {
 };
 
 const Wrapper = styled.div`
-  position: absolute;
-  bottom: 0;
+  /* position: absolute; */
+  margin-top: 20px;
   width: 100%;
   display: flex;
   flex-direction: column;
