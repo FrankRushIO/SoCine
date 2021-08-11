@@ -1,7 +1,9 @@
 import react, { useState, useContext, useEffect } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Loading from "./Loading";
+import { slideInLeft } from "react-animations";
+import { slideInRight } from "react-animations";
 
 const Prediction = () => {
   const { currentUser, likedMovies, mostPopularGenreId } =
@@ -161,6 +163,10 @@ const Prediction = () => {
   }
 };
 
+const slideAnimationLeft = keyframes`${slideInLeft}`;
+
+const slideAnimationRight = keyframes`${slideInRight}`;
+
 const Page = styled.div`
   min-height: 90vh;
   min-width: 100w;
@@ -183,6 +189,7 @@ const MoviesContainer = styled.div`
   width: 1000px;
   border: solid 2px black;
   border-radius: 10px;
+  animation: 1.5s ${slideAnimationLeft};
 `;
 
 const Movie = styled.div`
@@ -209,6 +216,7 @@ const TagLine = styled.span`
   width: 900px;
   margin-top: 20px;
   margin-bottom: 5px;
+  animation: 1.5s ${slideAnimationRight};
 `;
 
 export default Prediction;

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { generatePath } from "react-router-dom";
 import { useParams } from "react-router";
 import { CurrentUserContext } from "./CurrentUserContext";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Wall from "./Wall";
 import Logo1 from "./Logo1.png";
 import Logo2 from "./Logo2.png";
@@ -11,6 +11,13 @@ import Logo4 from "./Logo4.png";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
 import Popcorn from "./popcorn.png";
+import {
+  slideInLeft,
+  slideInRight,
+  slideInUp,
+  slideInDown,
+  fadeIn,
+} from "react-animations";
 
 const Profile = () => {
   const { currentUser, likedMovies } = useContext(CurrentUserContext);
@@ -155,6 +162,12 @@ const Profile = () => {
   } else return <Loading />;
 };
 
+const slideAnimationLeft = keyframes`${slideInLeft}`;
+const slideAnimationRight = keyframes`${slideInRight}`;
+const slideAnimationUp = keyframes`${slideInUp}`;
+const slideAnimationDown = keyframes`${slideInDown}`;
+const fadeInAnimation = keyframes`${fadeIn}`;
+
 const Container = styled.div`
   margin-left: 100px;
 `;
@@ -172,6 +185,7 @@ const UserInfoDiv = styled.div`
 const Avatar = styled.img`
   border-radius: 50%;
   width: 130px;
+  animation: 1s ${slideAnimationLeft};
 `;
 
 const UserInfo = styled.div`
@@ -184,6 +198,7 @@ const UserInfo = styled.div`
   justify-content: center;
   border: 2px solid black;
   background-color: pink;
+  animation: 1s ${slideAnimationLeft};
 `;
 
 const Statistics = styled.div`
@@ -196,6 +211,7 @@ const Statistics = styled.div`
   justify-content: center;
   border: 2px solid black;
   background-color: pink;
+  animation: 1s ${slideAnimationLeft};
 `;
 
 const LikedMovieWrapper = styled.div`

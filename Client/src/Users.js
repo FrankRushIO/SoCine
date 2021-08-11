@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router";
 import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { CurrentUserContext } from "./CurrentUserContext";
 import Logo1 from "./Logo1.png";
 import Logo2 from "./Logo2.png";
 import Logo3 from "./Logo3.png";
 import Logo4 from "./Logo4.png";
 import Loading from "./Loading";
+import { fadeInDown } from "react-animations";
 
 const Users = () => {
   const { currentUser, likedMovies, mostPopularGenreId } =
@@ -39,7 +40,7 @@ const Users = () => {
         <BigContainer>
           <SearchUser />
           <Wrapper>
-            {users.data.map((user) => {
+            {users.data.map((user, index) => {
               console.log(user._id);
               return (
                 <UserDiv>
@@ -62,8 +63,11 @@ const Users = () => {
     );
   }
 };
+const fadeAnimationDown = keyframes`${fadeInDown}`;
 
-const UserDiv = styled.div``;
+const UserDiv = styled.div`
+  animation: 1.5s ${fadeAnimationDown};
+`;
 
 const Page = styled.div`
   min-height: 750px;
@@ -92,6 +96,7 @@ const SearchUser = () => {
   return (
     <SearchContainer>
       <SearchInput
+        style={{ color: "white", borderColor: "white", borderRadius: "5px" }}
         type="text"
         value={searchInput}
         onChange={handleSearchInput}
@@ -103,6 +108,7 @@ const SearchUser = () => {
         placeholder="Type exact pseudo"
       ></SearchInput>
       <SearchButton
+        style={{ color: "white", borderColor: "white", borderRadius: "5px" }}
         className={searchInput.length < 3 ? "" : "working"}
         onClick={handleSearch}
       >
@@ -144,6 +150,10 @@ const User = styled.div`
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   margin-left: 30px;
   margin-top: 30px;
+
+  &:hover {
+    opacity: 60%;
+  }
 `;
 
 const Pseudo = styled.span``;
@@ -159,8 +169,11 @@ const SearchInput = styled.input`
   padding: 2px;
   margin-right: 10px;
   border-radius: 2px;
+  background-color: transparent;
+  color: white;
 `;
 const SearchButton = styled.button`
+  color: white;
   font-size: 14px;
   padding: 2px;
   border: 0.1px solid black;

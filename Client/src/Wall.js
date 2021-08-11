@@ -1,7 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { CurrentUserContext } from "./CurrentUserContext";
 import Loading from "./Loading";
+import {
+  slideInLeft,
+  slideInRight,
+  slideInUp,
+  slideInDown,
+  fadeIn,
+} from "react-animations";
 
 const Wall = ({ profileUser }) => {
   const { currentUser } = useContext(CurrentUserContext);
@@ -97,8 +104,11 @@ const Wall = ({ profileUser }) => {
   );
 };
 
+const fadeInAnimation = keyframes`${fadeIn}`;
+
 const WallContainer = styled.div`
   margin-top: 20px;
+  animation: 2s ${fadeInAnimation};
 `;
 
 const Container = styled.div`
