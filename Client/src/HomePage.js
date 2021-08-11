@@ -4,7 +4,7 @@ import { SearchBar } from "./Header";
 import Searchbackground from "./SearchBackground.jpg";
 import { themeVars } from "./GlobalStyles";
 import Poster1 from "./Poster6.png";
-import Poster2 from "./Poster4.png";
+import Poster2 from "./Poster8.png";
 
 const Homepage = () => {
   return (
@@ -42,7 +42,7 @@ const Div = styled.div`
   justify-content: center;
   flex-direction: column;
   border-radius: 60px;
-  border: 4px solid black;
+  border: 6px solid white;
 `;
 
 const Div2 = styled.div`
@@ -55,7 +55,7 @@ const Div2 = styled.div`
   justify-content: center;
   flex-direction: column;
   border-radius: 60px;
-  border: 4px solid black;
+  border: 6px solid white;
 `;
 
 const SearchContainer = styled.div`
@@ -68,7 +68,7 @@ const SearchContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   border-radius: 60px;
-  border: 4px solid black;
+  border: 6px solid white;
 `;
 
 const Intro1 = styled.h1`
