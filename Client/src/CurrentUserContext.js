@@ -58,6 +58,7 @@ export const CurrentUserProvider = ({ children }) => {
         `https://api.themoviedb.org/3/movie/${id}?api_key=a56759345cdd5a5d3830b778270ea182`
       );
       const parsedResponse = await response.json();
+      console.log("HEEYYYY", parsedResponse);
       const movie = {
         title: parsedResponse.title,
         posterPath: `https://image.tmdb.org/t/p/w185/${parsedResponse.poster_path}`,
@@ -134,6 +135,7 @@ export const CurrentUserProvider = ({ children }) => {
         `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=a56759345cdd5a5d3830b778270ea182&language=en-US&page=1`
       );
       const parsedResponse = await response.json();
+      console.log(parsedResponse.results[0]);
 
       const movie = {
         title: parsedResponse.results[0].title,

@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { CurrentUserContext } from "./CurrentUserContext";
+import Loading from "./Loading";
 
 const Wall = ({ profileUser }) => {
   const { currentUser } = useContext(CurrentUserContext);
@@ -18,7 +19,10 @@ const Wall = ({ profileUser }) => {
     return comments.length > 0 ? (
       <Comments>
         {comments.map((comment, index) => (
-          <div key={index}>{comment.comment}</div>
+          <CommentWrapper>
+            <Pseudo key={index + 1000}>{comment.pseudo} </Pseudo>
+            <Comment key={index}>{comment.comment}</Comment>
+          </CommentWrapper>
         ))}
       </Comments>
     ) : (
@@ -61,14 +65,14 @@ const Wall = ({ profileUser }) => {
   };
 
   return (
-    <div>
-      <h1>Wall</h1>
+    <WallContainer>
       {currentUser?.pseudo ? (
         <Container>
+          <Title>{currentUser.pseudo}'s Wall</Title>
           {displayComments()}
           <Form onSubmit={handleSubmit}>
             <InputLabel>
-              Comment this user's profile :
+              Comment on {profileUser.pseudo}'s wall:
               <InputField
                 type="text"
                 onChange={handleChangeComment}
@@ -82,29 +86,52 @@ const Wall = ({ profileUser }) => {
           </Form>
         </Container>
       ) : (
-        <div>loading</div>
+        <Loading />
       )}
-    </div>
+    </WallContainer>
   );
 };
 
+const WallContainer = styled.div`
+  margin-top: 20px;
+`;
+
 const Container = styled.div`
   width: 1200px;
-  height: 500px;
+  height: 400px;
   border: 2px black solid;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
+const Title = styled.span`
+  float: left;
+  width: 1100px;
+  margin-top: 10px;
+  font-size: 30px;
+`;
+
 const Comments = styled.div`
+  padding: 20px;
   height: 400px;
   width: 1100px;
   border: 1px solid black;
-  margin-top: 20px;
+  margin-top: 10px;
   color: black;
 `;
 
+const CommentWrapper = styled.div`
+  margin-top: 10px;
+  font-size: 15px;
+`;
+
+const Pseudo = styled.span``;
+const Comment = styled.span`
+  background-color: #ffcccb;
+  border-radius: 4px;
+  padding: 1px;
+`;
 const Form = styled.form`
   display: flex;
   flex-direction: column;

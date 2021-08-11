@@ -4,6 +4,11 @@ import { useParams } from "react-router";
 import { CurrentUserContext } from "./CurrentUserContext";
 import styled from "styled-components";
 import Wall from "./Wall";
+import Logo1 from "./Logo1.png";
+import Logo2 from "./Logo2.png";
+import Logo3 from "./Logo3.png";
+import Logo4 from "./Logo4.png";
+import Loading from "./Loading";
 
 const Profile = () => {
   const { currentUser, likedMovies } = useContext(CurrentUserContext);
@@ -12,6 +17,40 @@ const Profile = () => {
   const imported = useParams();
   console.log(imported);
   const profileId = Object.values(imported)[0];
+  const [genre, setGenre] = useState(undefined);
+  const genreArray = [];
+  console.log(genre);
+
+  const mostFrequent = (arr, n) => {
+    {
+      // Sort the array
+      arr.sort();
+
+      // find the max frequency using linear
+      // traversal
+      let max_count = 1,
+        res = arr[0];
+      let curr_count = 1;
+
+      for (let i = 1; i < n; i++) {
+        if (arr[i] == arr[i - 1]) curr_count++;
+        else {
+          if (curr_count > max_count) {
+            max_count = curr_count;
+            res = arr[i - 1];
+          }
+          curr_count = 1;
+        }
+      }
+
+      // If last element is most frequent
+      if (curr_count > max_count) {
+        max_count = curr_count;
+        res = arr[n - 1];
+      }
+      return res;
+    }
+  };
 
   useEffect(() => {
     fetch(`/users/${profileId}`)
@@ -31,13 +70,28 @@ const Profile = () => {
       });
   }, [profileId]);
 
+  useEffect(() => {
+    console.log(profileUser);
+    if (profileUser) {
+      console.log(profileUser.likedMovies);
+      likedMovies.map((movie) => {
+        return movie.genre.map((genre) => {
+          return genreArray.push(genre.id);
+        });
+      });
+    }
+    const Id = mostFrequent(genreArray, genreArray.length);
+    setGenre(Id);
+  }, [profileUser]);
+
   if (profileUser?.pseudo) {
     console.log(profileUser);
+    console.log(genre);
     return (
       <Container>
         <Greeting>{profileUser.pseudo}'s profile</Greeting>
         <UserInfoDiv>
-          <Avatar />
+          <Avatar src={profileUser.avatar} />
           <UserInfo>
             <div>Given Name: {profileUser.givenName}</div>
             <div>Surname : {profileUser.surname}</div>
@@ -47,15 +101,17 @@ const Profile = () => {
           <Statistics>
             Statistics
             <div>
-              <p>Number of liked movies: </p>
-              <p>Favorite genre:</p>
-              <p>Number of friends:</p>
+              <p>Number of liked movies: {profileUser.likedMovies.length} </p>
+              <p>Favorite genre: {genre}</p>
+              <p>Number of people following: {profileUser?.following.length}</p>
             </div>
           </Statistics>
         </UserInfoDiv>
         <Wall profileUser={profileUser} />
+        <div style={{ marginTop: "30px", fontSize: "20px" }}>
+          Liked movies : {profileUser.likedMovies.length}
+        </div>
         <LikedMovieContainer>
-          <div>Liked movies : {profileUser.likedMovies.length}</div>
           {likedMovies.map((movie) => {
             return (
               <LikedMovie>
@@ -72,7 +128,7 @@ const Profile = () => {
         </LikedMovieContainer>
       </Container>
     );
-  } else return <div>Loading</div>;
+  } else return <Loading />;
 };
 
 const Container = styled.div`
@@ -89,15 +145,14 @@ const UserInfoDiv = styled.div`
   max-width: 1200px;
 `;
 
-const Avatar = styled.div`
-  width: 200px;
-  height: 300px;
-  background-color: purple;
+const Avatar = styled.img`
+  border-radius: 50%;
+  width: 100px;
 `;
 
 const UserInfo = styled.div`
   padding: 10px;
-  width: 500px;
+  width: 530px;
   margin-left: 20px;
   display: flex;
   flex-direction: column;
@@ -109,12 +164,17 @@ const UserInfo = styled.div`
 const Statistics = styled.div`
   padding: 10px;
   margin-left: 20px;
-  width: 460px;
+  width: 530px;
   display: flex;
   flex-direction: column;
   /* align-items: center; */
   justify-content: center;
   border: 2px solid black;
+`;
+
+const LikedMovieWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const LikedMovieContainer = styled.div`

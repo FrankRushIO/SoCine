@@ -22,7 +22,7 @@ import Users from "./Users";
 import User from "./User";
 
 function App() {
-  const { setAuth0Email } = useContext(CurrentUserContext);
+  const { setAuth0Email, currentUser } = useContext(CurrentUserContext);
   const { isLoading, user } = useAuth0();
 
   useEffect(() => {
@@ -35,11 +35,11 @@ function App() {
     return <div>Loading...</div>;
   }
 
+  console.log(currentUser);
   return (
     <Auth0ProviderWithHistory>
       <GlobalStyles />
       <Header />
-      {/* <Main> */}
       <Switch>
         <Route exact path="/">
           <HomePage />
@@ -78,8 +78,6 @@ function App() {
           <User />
         </Route>
       </Switch>
-
-      {/* </Main> */}
       <Footer />
     </Auth0ProviderWithHistory>
   );

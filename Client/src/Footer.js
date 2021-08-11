@@ -50,35 +50,24 @@ const Footer = () => {
         <FiLinkedin />
       </SocialSection>
 
-      <div>©2021 Team Water. All Rights Reserved</div>
+      <div>©2021 Team SoCine. All Rights Reserved</div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  /* background-image: linear-gradient(white, var(--beau-blue)); */
-  /* position: fixed; */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 16px;
-  left: 0;
-  bottom: 0;
-  width: 100vw;
   background-color: pink;
   color: white;
   text-align: center;
-  margin-top: 20px;
-  padding-top: 10px;
+  z-index: 1000;
 `;
-
-// width: 100vw;
-// padding: 1rem 0 0.5rem 0;
-// display: flex;
-// flex-direction: column;
-// align-items: center;
-// font-size: 16px;
-
 // Links Section
 const LinksSection = styled.div`
   display: flex;

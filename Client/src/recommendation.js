@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Link, NavLink } from "react-router-dom";
+import Loading from "./Loading";
 
 const request = require("request-promise");
 
@@ -28,7 +29,7 @@ const Recommendations = ({ id }) => {
     handleSearch();
   }, [id]);
 
-  if (recommendations === null) return <div>Loading</div>;
+  if (recommendations === null) return <Loading />;
   else {
     return (
       <div>

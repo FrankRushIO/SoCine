@@ -3,6 +3,11 @@ import { useHistory } from "react-router";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { CurrentUserContext } from "./CurrentUserContext";
+import Logo1 from "./Logo1.png";
+import Logo2 from "./Logo2.png";
+import Logo3 from "./Logo3.png";
+import Logo4 from "./Logo4.png";
+import Loading from "./Loading";
 
 const Users = () => {
   const { currentUser, likedMovies, mostPopularGenreId } =
@@ -26,35 +31,37 @@ const Users = () => {
 
   if (users === "") {
     console.log(users);
-    return <div>Loading...</div>;
+    return <Loading />;
   } else {
     console.log(users);
     return (
-      <Container>
+      <BigContainer>
         <SearchUser />
         <Wrapper>
           {users.data.map((user) => {
             console.log(user._id);
             return (
-              <NavLink
-                style={{ textDecoration: "none", color: "black" }}
-                to={`/profile/${user._id}`}
-              >
-                <User>
-                  {" "}
-                  <Surname>{user.surname}</Surname>
-                  <Name>{user.givenName}</Name>
-                  <Pseudo>{user.pseudo}</Pseudo>
-                  <Avatar>{user.pseudo.substring(0, 1)}</Avatar>
-                </User>
-              </NavLink>
+              <UserDiv>
+                <NavLink
+                  style={{ textDecoration: "none", color: "black" }}
+                  to={`/profile/${user._id}`}
+                >
+                  <User>
+                    {" "}
+                    <Avatar src={user.avatar} />
+                    <Pseudo>{user.pseudo}</Pseudo>
+                  </User>
+                </NavLink>
+              </UserDiv>
             );
           })}
         </Wrapper>
-      </Container>
+      </BigContainer>
     );
   }
 };
+
+const UserDiv = styled.div``;
 
 const SearchUser = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -77,7 +84,7 @@ const SearchUser = () => {
   };
 
   return (
-    <div>
+    <SearchContainer>
       <SearchInput
         type="text"
         value={searchInput}
@@ -87,7 +94,7 @@ const SearchUser = () => {
             handleSearch(ev);
           }
         }}
-        placeholder="Search for any items"
+        placeholder="Type exact pseudo"
       ></SearchInput>
       <SearchButton
         className={searchInput.length < 3 ? "" : "working"}
@@ -95,36 +102,48 @@ const SearchUser = () => {
       >
         Search
       </SearchButton>
-    </div>
+    </SearchContainer>
   );
 };
 
-const Wrapper = styled.div`
-  display: flex;
-`;
-
-const Container = styled.div`
+const BigContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 1200px;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 100px;
+`;
+
+const Wrapper = styled.div`
+  width: 1100px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding-bottom: 30px;
+`;
+
+const SearchContainer = styled.div`
+  width: 1050px;
+  float: left;
 `;
 
 const User = styled.div`
   display: flex;
   flex-direction: column;
-  width: 300px;
+  align-items: center;
+  width: 150px;
+  /* border: 1px black solid; */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin-left: 30px;
+  margin-top: 30px;
 `;
 
-const Surname = styled.span``;
-const Name = styled.span``;
 const Pseudo = styled.span``;
-const Avatar = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const Avatar = styled.img`
+  border-radius: 50%;
   width: 100px;
-  height: 100px;
-  background-color: pink;
-  font-size: 40px;
 `;
 
 // Search
@@ -141,17 +160,17 @@ const SearchButton = styled.button`
   border: 0.1px solid black;
   /* border-radius: 1px; */
   background-color: var(--steel-blue);
-  color: white;
+  color: black;
 
   transition: all 200ms;
 
   &.working {
     cursor: pointer;
-    color: white;
+    color: black;
     background-color: var(--royal-blue);
     &:hover {
       background-color: var(--steel-blue);
-      color: white;
+      color: Green;
       border: 0.1px solid black;
     }
   }

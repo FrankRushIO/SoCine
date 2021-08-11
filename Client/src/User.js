@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
-import { useLocation, NavLink } from "react-router-dom";
+import { useLocation, NavLink, useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import { UsersContext } from "./UsersContext";
@@ -91,7 +91,16 @@ const Search = () => {
   return (
     <div>
       <div>Votre recherche : {searchInput}</div>
-      <div>{user.pseudo}</div>
+      <NavLink
+        style={{ textDecoration: "none", color: "black" }}
+        to={`/profile/${user._id}`}
+      >
+        <div>
+          {" "}
+          <div>{user.pseudo}</div>
+          <img src={user.avatar} />
+        </div>
+      </NavLink>
       <button onClick={handleClickFollow}>
         {!isFollowed ? "Follow " : "UnFollow "}
         user
