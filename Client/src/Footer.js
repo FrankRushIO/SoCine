@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import {
   FiFacebook,
   FiInstagram,
@@ -9,6 +9,8 @@ import {
 } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 import { CurrentUserContext } from "./CurrentUserContext";
+import { fadeInDown } from "react-animations";
+import { slideInRight } from "react-animations";
 
 const Footer = () => {
   const { currentUser } = useContext(CurrentUserContext);
@@ -38,9 +40,7 @@ const Footer = () => {
           <Header>Account</Header>
           <ListOfLinks>
             <li>
-              <StyledNavLink to={`/profile/${currentUser._id}`}>
-                Profile
-              </StyledNavLink>
+              <StyledNavLink to={`/`}>Home</StyledNavLink>
             </li>
           </ListOfLinks>
         </div>
