@@ -42,7 +42,13 @@ const Results = () => {
               style={{ textDecoration: "none", color: "black" }}
               to={`/movie/${movie.id}`}
             >
-              <MovieContainer>
+              <MovieContainer
+                style={
+                  {
+                    // backgroundImage: `linear-gradient(to right, rgba(0, 224, 255, 1), rgba(0, 133, 255, 1))`,
+                  }
+                }
+              >
                 <div>
                   <Poster
                     src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
@@ -88,7 +94,7 @@ const Container = styled.div`
   align-items: center;
   align-content: stretch;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 const ResultIntroDiv = styled.div`
@@ -107,7 +113,8 @@ const MovieContainer = styled.div`
   align-items: center;
   width: 900px;
   border: 1px solid black;
-  &:hover {
+  /* background-color: red; */
+  bacj &:hover {
     opacity: 0.5;
   }
   /* flex-direction: column; */

@@ -26,7 +26,7 @@ const Questions = ({ faq }) => {
   const { question, answer } = faq;
 
   return (
-    <div>
+    <div style={{ marginBottom: "20px" }}>
       <FaqWrapper>
         <Container>
           <Quest>

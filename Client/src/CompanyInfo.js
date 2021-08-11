@@ -10,13 +10,16 @@ const CompanyInfo = () => {
         <Container>
           <Header>About Us</Header>
           <About>
-            Eauriginal is passionate about bringing the best accessories to
-            North America. Established in 2021, we are a Canadian company based
-            in Montréal that proudly serves 1 pseudo-patron. We strive to be the
-            only e-commerce company in the accessory & wearables world. Our
-            promise is to keep you "eau courant" with all the latest trends.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+            tincidunt vitae risus et tincidunt. Pellentesque commodo malesuada
+            tortor, eget scelerisque sapien egestas sit amet. Nulla sit amet
+            vehicula ipsum. Pellentesque vel ipsum a elit placerat dignissim
+            facilisis vel dui. Nam purus quam, consectetur sed vulputate ac,
+            feugiat et justo. Cras consequat commodo tempor. Nunc fermentum nunc
+            non nibh sollicitudin, eget pulvinar ligula cursus. Etiam suscipit
+            dolor et efficitur tristique.
           </About>
-          <Team>-Team Water</Team>
+          <Team>-Team SoCine</Team>
         </Container>
       </Wrapper>
     </div>

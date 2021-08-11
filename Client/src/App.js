@@ -36,6 +36,7 @@ function App() {
   }
 
   console.log(currentUser);
+
   return (
     <Auth0ProviderWithHistory>
       <GlobalStyles />

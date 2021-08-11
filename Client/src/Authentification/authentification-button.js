@@ -1,5 +1,5 @@
 import React from "react";
-
+import styled from "styled-components";
 import LoginButton from "./loging-button";
 import LogoutButton from "./logout-button";
 

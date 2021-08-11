@@ -22,7 +22,7 @@ const Register = () => {
   const followedBy = [];
   const comments = [];
   const _id = uuidv4();
-  const [pseudoAvailable, setPseudoAvailable] = useState(false);
+  // const [pseudoAvailable, setPseudoAvailable] = useState(false);
   const [avatar, setAvatar] = useState("");
 
   const handleChangeGivenName = (ev) => {
@@ -96,6 +96,7 @@ const Register = () => {
                 value={givenName}
                 onChange={handleChangeGivenName}
                 required
+                maxLength="20"
               />
             </InputLabel>
             <InputLabel>
@@ -105,6 +106,7 @@ const Register = () => {
                 value={surname}
                 onChange={handleChangeSurName}
                 required
+                maxLength="20"
               />
             </InputLabel>
             <InputLabel>
@@ -114,12 +116,12 @@ const Register = () => {
                 value={pseudo}
                 onChange={handleChangePseudo}
                 required
+                maxLength="20"
               />
             </InputLabel>
             <Email>Email : {email}</Email>
+            <AvatarPhrase>Pick an Avatar </AvatarPhrase>
             <PictureDiv>
-              <AvatarPhrase>Pick an Avatar </AvatarPhrase>
-
               <Input
                 type="radio"
                 id="myButton1"
@@ -164,7 +166,7 @@ const Register = () => {
                 <Picture src={Logo4} />
               </Label>
             </PictureDiv>
-            <input type="submit" value="Create profile" />
+            <SubmitButton type="submit" value="Create profile" />
           </Form>
         </RegisterContainer>
       </Container>
@@ -177,6 +179,18 @@ const Radio = styled.input`
   opacity: 0;
   width: 0;
   height: 0;
+`;
+
+const SubmitButton = styled.input`
+  background-color: #e34665;
+  border: pink 1px solid;
+  color: white;
+  min-width: 50px;
+  font-size: 20px;
+  border-radius: 5px;
+  &:hover {
+    background: #e3667f;
+  }
 `;
 
 const Label = styled.label``;
@@ -194,19 +208,15 @@ const AvatarPhrase = styled.h1`
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  color: white;
+  color: #e34665;
 `;
 
 const PictureDiv = styled.div`
   margin-top: 10px;
-`;
-
-const Button = styled.button`
-  background-color: transparent;
-  border: none;
-  &.active {
-    border-bottom: 20px solid black;
-  }
+  border: 3px dotted pink;
+  padding: 5px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 `;
 
 const Picture = styled.img`
@@ -234,7 +244,8 @@ const RegisterContainer = styled.div`
   align-content: stretch;
   /* background-color: red; */
   width: 800px;
-  background-color: pink;
+  background-color: white;
+  border-radius: 20px;
   height: 900px;
 `;
 
@@ -252,7 +263,7 @@ const Form = styled.form`
   align-items: center;
   align-content: space-between;
   /* width: 800px; */
-  background-color: pink;
+  background-color: white;
 `;
 
 const InputLabel = styled.label`
@@ -262,13 +273,13 @@ const InputLabel = styled.label`
   left: 55px;
   background: #ffffff;
   transition: 300ms;
-  background-color: pink;
+  background-color: white;
   margin-bottom: 5px;
 `;
 const InputField = styled.input`
   outline: none;
   display: block;
-  color: #3777ff;
+  color: #e34665;
   padding: 16px 22px;
   border: 1px solid #dadce0;
   font-size: 18px;
@@ -278,9 +289,13 @@ const InputField = styled.input`
   background-color: white;
 `;
 
-const Email = styled.p`
+const Email = styled.div`
   margin-bottom: 30px;
+  display: flex;
+  align-items: flex-start;
   color: #e34665;
+  /* background-color: red; */
+  width: 370px;
 `;
 
 export default Register;

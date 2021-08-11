@@ -1,10 +1,12 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { SearchBar } from "./Header";
 import Searchbackground from "./SearchBackground.jpg";
 import { themeVars } from "./GlobalStyles";
 import Poster1 from "./Poster6.png";
 import Poster2 from "./Poster8.png";
+import { slideInLeft } from "react-animations";
+import { slideInRight } from "react-animations";
 
 const Homepage = () => {
   return (
@@ -23,6 +25,10 @@ const Homepage = () => {
     </Container>
   );
 };
+
+const slideAnimationLeft = keyframes`${slideInLeft}`;
+
+const slideAnimationRight = keyframes`${slideInRight}`;
 
 const Container = styled.div`
   display: flex;
@@ -43,6 +49,7 @@ const Div = styled.div`
   flex-direction: column;
   border-radius: 60px;
   border: 6px solid white;
+  animation: 1.5s ${slideAnimationRight};
 `;
 
 const Div2 = styled.div`
@@ -56,6 +63,7 @@ const Div2 = styled.div`
   flex-direction: column;
   border-radius: 60px;
   border: 6px solid white;
+  animation: 1.5s ${slideAnimationRight};
 `;
 
 const SearchContainer = styled.div`
@@ -69,6 +77,7 @@ const SearchContainer = styled.div`
   flex-direction: column;
   border-radius: 60px;
   border: 6px solid white;
+  animation: 1.5s ${slideAnimationLeft};
 `;
 
 const Intro1 = styled.h1`

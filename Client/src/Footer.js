@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import {
   FiFacebook,
@@ -8,8 +8,10 @@ import {
   FiGithub,
 } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
+import { CurrentUserContext } from "./CurrentUserContext";
 
 const Footer = () => {
+  const { currentUser } = useContext(CurrentUserContext);
   return (
     <Wrapper>
       <LinksSection>
@@ -36,7 +38,9 @@ const Footer = () => {
           <Header>Account</Header>
           <ListOfLinks>
             <li>
-              <StyledNavLink to="/cart">My Cart</StyledNavLink>
+              <StyledNavLink to={`/profile/${currentUser._id}`}>
+                Profile
+              </StyledNavLink>
             </li>
           </ListOfLinks>
         </div>
@@ -63,10 +67,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   font-size: 16px;
-  background-color: pink;
   color: white;
   text-align: center;
-  z-index: 1000;
+  z-index: -1;
 `;
 // Links Section
 const LinksSection = styled.div`
