@@ -102,6 +102,7 @@ const WallContainer = styled.div`
 `;
 
 const Container = styled.div`
+  border-radius: 15px;
   width: 1200px;
   height: 400px;
   border: 2px black solid;
@@ -114,28 +115,32 @@ const Title = styled.span`
   float: left;
   width: 1100px;
   margin-top: 10px;
-  font-size: 30px;
+  font-size: 23px;
 `;
 
 const Comments = styled.div`
-  padding: 20px;
+  padding: 10px;
   height: 400px;
   width: 1100px;
   border: 1px solid black;
   margin-top: 10px;
   color: black;
+  background-color: white;
+  border-radius: 10px;
 `;
 
 const CommentWrapper = styled.div`
   margin-top: 10px;
   font-size: 15px;
+  min-height: 25px;
+  border-bottom: 1px solid black;
 `;
 
 const Pseudo = styled.span``;
 const Comment = styled.span`
   background-color: #ffcccb;
   border-radius: 4px;
-  padding: 1px;
+  padding: 0.1rem 0.5rem 0.1rem 0.5rem;
   max-width: 300px;
   border: 1px solid black;
 `;
@@ -148,12 +153,14 @@ const Form = styled.form`
 const InputLabel = styled.label`
   display: block;
   color: black;
+  border-radius: 5px;
 `;
 const InputField = styled.input`
   height: 30px;
   width: 1100px;
   border: 1px solid black;
   display: block;
+  border-radius: 5px;
 `;
 
 const InputSubmit = styled.input`

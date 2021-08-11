@@ -103,61 +103,71 @@ const Prediction = () => {
 
   if (likedMovies.length < 3) {
     return (
-      <div>
+      <Page style={{ color: "white", fontSize: "30px" }}>
         You have not liked enough movies to receive recommendations, please like
         at least 3 movies.
-      </div>
+      </Page>
     );
   } else {
     const randomMovies = getRandom(likedMovies, 3);
     return (
-      <Container>
-        <TagLine>Movies recommended from movies you've seen</TagLine>
-        <RecomendationContainer>
-          {randomMovies.map((movie, index) => {
-            return (
-              <div key={index}>
-                {" "}
-                <Title>{movie.title}</Title>
-                <img
-                  src={`https://image.tmdb.org/t/p/w185/${movie.posterPath}`}
-                />
-              </div>
-            );
-          })}
-        </RecomendationContainer>
-        <TagLine>Movies recommended from your favorite genre</TagLine>
-        <GenreContainer>
-          {genreMovies.map((movie, index) => {
-            return (
-              <div key={index}>
-                {" "}
-                <Title>{movie.title}</Title>
-                <img
-                  src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
-                />
-              </div>
-            );
-          })}
-        </GenreContainer>
-        <TagLine>Movies recommended from popular movies right now</TagLine>
-        <PopularContainer>
-          {popularMovies.map((movie, index) => {
-            return (
-              <div key={index}>
-                {" "}
-                <Title>{movie.title}</Title>
-                <img
-                  src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
-                />
-              </div>
-            );
-          })}
-        </PopularContainer>
-      </Container>
+      <Page>
+        <Container>
+          <TagLine>Movies recommended from movies you've seen</TagLine>
+          <MoviesContainer>
+            {randomMovies.map((movie, index) => {
+              return (
+                <Movie key={index}>
+                  {" "}
+                  <Title>{movie.title}</Title>
+                  <Poster
+                    src={`https://image.tmdb.org/t/p/w185/${movie.posterPath}`}
+                  />
+                </Movie>
+              );
+            })}
+          </MoviesContainer>
+          <TagLine>Movies recommended from your favorite genre</TagLine>
+          <MoviesContainer>
+            {genreMovies.map((movie, index) => {
+              return (
+                <Movie key={index}>
+                  {" "}
+                  <Title>{movie.title}</Title>
+                  <Poster
+                    src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
+                  />
+                </Movie>
+              );
+            })}
+          </MoviesContainer>
+          <TagLine>Movies recommended from popular movies right now</TagLine>
+          <MoviesContainer>
+            {popularMovies.map((movie, index) => {
+              return (
+                <Movie key={index}>
+                  {" "}
+                  <Title>{movie.title}</Title>
+                  <Poster
+                    src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
+                  />
+                </Movie>
+              );
+            })}
+          </MoviesContainer>
+        </Container>
+      </Page>
     );
   }
 };
+
+const Page = styled.div`
+  min-height: 90vh;
+  min-width: 100w;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const Container = styled.div`
   display: flex;
@@ -166,32 +176,31 @@ const Container = styled.div`
   min-width: 1200px;
   /* background-color: red; */
 `;
-const PopularContainer = styled.div`
+const MoviesContainer = styled.div`
   display: flex;
   /* margin-top: 10px; */
   justify-content: space-around;
   width: 1000px;
   border: solid 2px black;
+  border-radius: 10px;
 `;
-const GenreContainer = styled.div`
+
+const Movie = styled.div`
   display: flex;
-  /* margin-top: 10px; */
-  justify-content: space-around;
-  width: 1000px;
-  border: solid 2px black;
-`;
-const RecomendationContainer = styled.div`
-  display: flex;
-  /* margin-top: 10px; */
-  justify-content: space-around;
-  width: 1000px;
-  border: solid 2px black;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
 `;
 
 const Title = styled.div`
   max-width: 180px;
   min-height: 30px;
-  margin-top: 10px;
+  border-bottom: 2px solid black;
+  margin-bottom: 10px;
+`;
+
+const Poster = styled.img`
+  border-radius: 5px;
 `;
 
 const TagLine = styled.span`

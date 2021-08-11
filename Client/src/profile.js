@@ -10,6 +10,7 @@ import Logo3 from "./Logo3.png";
 import Logo4 from "./Logo4.png";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
+import Popcorn from "./popcorn.png";
 
 const Profile = () => {
   const { currentUser, likedMovies } = useContext(CurrentUserContext);
@@ -107,10 +108,19 @@ const Profile = () => {
               <p>Number of people following: {profileUser?.following.length}</p>
             </div>
           </Statistics>
+          <img src={Popcorn} style={{ width: "130px", marginLeft: "30px" }} />
         </UserInfoDiv>
         <Wall profileUser={profileUser} />
-        <div style={{ marginTop: "30px", fontSize: "20px" }}>
-          Liked movies : {profileUser.likedMovies.length}
+        <div
+          style={{
+            width: "1200px",
+            marginTop: "30px",
+            fontSize: "30px",
+            borderBottom: "2px solid black",
+          }}
+        >
+          {profileUser.pseudo}'s liked movies collection (
+          {profileUser.likedMovies.length})
         </div>
         <LikedMovieContainer>
           {likedMovies.map((movie) => {
@@ -130,13 +140,12 @@ const Profile = () => {
                 >
                   <Title>{movie.title}</Title>
                   <Poster src={movie.posterPath} alt="Movie Poster" />
-                  <div>
+                  <Genres>
                     {movie.genre.map((genre, index) => {
                       return <div key={index}>{genre.name} </div>;
                     })}
-                  </div>
+                  </Genres>
                 </Link>
-                ;
               </LikedMovie>
             );
           })}
@@ -162,29 +171,31 @@ const UserInfoDiv = styled.div`
 
 const Avatar = styled.img`
   border-radius: 50%;
-  width: 100px;
+  width: 130px;
 `;
 
 const UserInfo = styled.div`
   padding: 10px;
-  width: 530px;
+  width: 520px;
   margin-left: 20px;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+  border-radius: 15px;
   justify-content: center;
   border: 2px solid black;
+  background-color: pink;
 `;
 
 const Statistics = styled.div`
   padding: 10px;
   margin-left: 20px;
-  width: 530px;
+  width: 350px;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+  border-radius: 15px;
   justify-content: center;
   border: 2px solid black;
+  background-color: pink;
 `;
 
 const LikedMovieWrapper = styled.div`
@@ -208,18 +219,42 @@ const LikedMovie = styled.div`
   flex-direction: column;
   align-items: center;
   width: 300px;
-  min-height: 450px;
-  border: 3px black solid;
+  min-height: 420px;
+  border: 2px white solid;
+  border-radius: 15px;
+  background-color: #e3667f;
+  margin: 5px;
+  &:hover {
+    opacity: 60%;
+  }
 `;
 
 const Poster = styled.img`
   max-height: 280px;
-  max-width: 200px;
+  width: 200px;
+  border-radius: 10px;
 `;
 
-const Title = styled.p`
-  max-width: 200px;
-  min-height: 40px;
+const Genres = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  min-height: 85px;
+  flex-direction: column;
+  color: white;
+  background-color: #c98290;
+  border-radius: 10px;
+`;
+
+const Title = styled.h1`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  border-bottom: 2px solid white;
+  margin-bottom: 5px;
+  color: white;
 `;
 
 export default Profile;

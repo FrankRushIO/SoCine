@@ -22,7 +22,7 @@ const Header = () => {
       <Center>
         <NavItem>
           <StyledNavLink className="navitem" to="/">
-            HomePage
+            Homepage
           </StyledNavLink>
         </NavItem>
         {currentUser ? (
@@ -36,7 +36,7 @@ const Header = () => {
             </StyledNavLink>
           </NavItem>
         ) : (
-          <div>Profile (not connected)</div>
+          <NotConnected>Profile (not connected)</NotConnected>
         )}
 
         <NavItem>
@@ -113,15 +113,24 @@ export const SearchBar = () => {
   );
 };
 
+const NotConnected = styled.div`
+  color: white;
+  margin: 0 2rem;
+  padding: 10px;
+  font-size: 18px;
+  /* background-color: red; */
+  max-width: 110px;
+`;
 const Container = styled.div`
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
   align-content: baseline;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
   margin-bottom: 30px;
   background-color: #140c5c;
+  padding-top: 10px;
 `;
 
 const StyledLogo = styled.img`
@@ -132,48 +141,57 @@ const StyledLogo = styled.img`
 
 const SearchInput = styled.input`
   font-size: 14px;
+  color: white;
+  border: white 1px solid;
   padding: 2px;
   border-radius: 2px;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 0.35em 1.2em;
+  margin-right: 3px;
+  &::placeholder {
+    color: white;
+  }
 `;
 const SearchButton = styled.button`
-  font-size: 14px;
-  padding: 2px;
-  border: 0.1px solid black;
-  /* border-radius: 1px; */
-  color: black;
-
-  transition: all 200ms;
-
-  &.working {
-    cursor: pointer;
-    color: black;
-    background-color: var(--royal-blue);
-    &:hover {
-      background-color: var(--steel-blue);
-      color: black;
-      border: 0.1px solid black;
-    }
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #ffffff;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 300;
+  color: #ffffff;
+  text-align: center;
+  background-color: transparent;
+  transition: all 0.2s;
+  :hover {
+    color: #000000;
+    background-color: #ffffff;
   }
 `;
 
 const Center = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
 `;
 
 const NavItem = styled.div`
   margin: 0 2rem;
   padding: 10px;
-  font-size: 20px;
+  font-size: 16px;
 `;
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   color: white;
   font-size: larger;
-
-  &.active.navitem {
-    border-bottom: 1px solid black;
+  transition: all 0.2s;
+  &:hover {
+    border-bottom: 2px solid white;
   }
 `;
 

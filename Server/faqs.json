@@ -1,22 +1,22 @@
 [
     {
-      "question": "What are your shipping rates?",
-      "answer": "We currently offer free shipping for all orders!",
+      "question": "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+      "answer": "Pellentesque commodo malesuada tortor, eget scelerisque sapien egestas sit amet.",
       "_id": 1111
     },
     {
-      "question": "When can I expect my order to be delivered?",
-      "answer": "Shipping times may vary based on your location, all orders should be recieved in 5-6 business days (give or take an eternity).",
+      "question": "Nulla sit amet vehicula ipsum?",
+      "answer": " Nam purus quam, consectetur sed vulputate ac, feugiat et justo.",
       "_id": 1112
     },
     {
-      "question": "Can I track my order?",
-      "answer": "We currently do not provide tracking as shipping times can vary greatly.",
+      "question": "Nunc fermentum nunc non nibh sollicitudin, eget pulvinar ligula cursus?",
+      "answer": "Sed quis pellentesque libero, eget sagittis dui",
       "_id": 1113
     },
     {
-      "question": "What is your return policy?",
-      "answer": "You have a period of 30 days + eternity for a full refund.",
+      "question": "Maecenas malesuada libero sit amet est maximus?",
+      "answer": "Morbi laoreet scelerisque felis a imperdiet. Sed quis pellentesque libero, eget sagittis dui",
       "_id": 1114
     }
   ]
