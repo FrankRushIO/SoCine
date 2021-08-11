@@ -9,6 +9,7 @@ import Logo2 from "./Logo2.png";
 import Logo3 from "./Logo3.png";
 import Logo4 from "./Logo4.png";
 import Loading from "./Loading";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { currentUser, likedMovies } = useContext(CurrentUserContext);
@@ -113,15 +114,29 @@ const Profile = () => {
         </div>
         <LikedMovieContainer>
           {likedMovies.map((movie) => {
+            {
+              console.log(movie);
+            }
+
             return (
               <LikedMovie>
-                <Title>{movie.title}</Title>
-                <Poster src={movie.posterPath} alt="Movie Poster" />
-                <div>
-                  {movie.genre.map((genre, index) => {
-                    return <div key={index}>{genre.name} </div>;
-                  })}
-                </div>
+                <Link
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    height: "20px",
+                  }}
+                  to={`/movie/${movie.id}`}
+                >
+                  <Title>{movie.title}</Title>
+                  <Poster src={movie.posterPath} alt="Movie Poster" />
+                  <div>
+                    {movie.genre.map((genre, index) => {
+                      return <div key={index}>{genre.name} </div>;
+                    })}
+                  </div>
+                </Link>
+                ;
               </LikedMovie>
             );
           })}

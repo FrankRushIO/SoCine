@@ -136,7 +136,6 @@ const SearchButton = styled.button`
   padding: 2px;
   border: 0.1px solid black;
   /* border-radius: 1px; */
-  background-color: var(--steel-blue);
   color: black;
 
   transition: all 200ms;

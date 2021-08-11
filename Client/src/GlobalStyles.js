@@ -18,7 +18,7 @@ export default createGlobalStyle`
     --font-existence: 'Atkinson Hyperlegible', sans-seriff;
    
   body{
-      background-color: #FFFFFF;
+    background: linear-gradient(to right, rgba(0, 224, 255, 1), rgba(0, 133, 255, 1));
       min-height: 1000px;
         }
 }

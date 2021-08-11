@@ -45,12 +45,21 @@ const Recommendations = ({ id }) => {
                   }}
                   to={`/movie/${recommendations[index].id}`}
                 >
-                  <Title>{movie.title}</Title>
+                  <div
+                    style={{
+                      minHeight: "30px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Title>{movie.title}</Title>
+                  </div>
+                  <Poster
+                    src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
+                    alt="Movie poster"
+                  />
                 </Link>
-                <Poster
-                  src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
-                  alt="Movie poster"
-                />
               </Movie>
             );
           })}
@@ -69,14 +78,19 @@ const RecommandationsContainer = styled.div`
 `;
 
 const Movie = styled.div`
-  margin-right: 10px;
+  margin-right: 13px;
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: stretch;
+  min-height: 200px;
 `;
 const Title = styled.span`
   font-size: 10px;
-
-  min-height: 15px;
+  min-height: 20px;
+  /* border: 1px solid black; */
 `;
 const Poster = styled.img`
   width: 100px;
