@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useHistory, NavLink } from "react-router-dom";
+import { useHistory, NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "./SoCine.png";
 import AuthNav from "./Authentification/auth-nav";
@@ -16,7 +16,9 @@ const Header = () => {
 
   return (
     <Container>
-      <StyledLogo src={Logo} alt="logo" />
+      <Link to="/">
+        <StyledLogo src={Logo} alt="logo" />
+      </Link>
       <Center>
         <NavItem>
           <StyledNavLink className="navitem" to="/">
@@ -117,7 +119,9 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   align-content: baseline;
+  padding-bottom: 30px;
   margin-bottom: 30px;
+  background-color: #140c5c;
 `;
 
 const StyledLogo = styled.img`
@@ -165,7 +169,7 @@ const NavItem = styled.div`
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
-  color: black;
+  color: white;
   font-size: larger;
 
   &.active.navitem {
